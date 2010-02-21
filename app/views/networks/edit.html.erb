@@ -1,0 +1,56 @@
+<h1>Configuration</h1>
+
+<% form_for @network, :url => network_path do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :method, Network.human_attribute_name("method") %><br/>
+    <%= f.text_field :method %>
+  </p>
+
+  <p>
+    <%= f.label :static_address, Network.human_attribute_name("static_address") %><br/>
+    <%= f.text_field :static_address %>
+  </p>
+
+  <p>
+    <%= f.label :static_netmask, Network.human_attribute_name("static_netmask") %><br/>
+    <%= f.text_field :static_netmask %>
+  </p>
+
+  <p>
+    <%= f.label :static_gateway, Network.human_attribute_name("static_gateway") %><br/>
+    <%= f.text_field :static_gateway %>
+  </p>
+
+  <p>
+    <%= f.label :static_dns1, Network.human_attribute_name("static_dns1") %><br/>
+    <%= f.text_field :static_dns1 %>
+  </p>
+
+  <p>
+    <%= f.label :linkstream_target_host, Network.human_attribute_name("linkstream_target_host") %><br/>
+    <%= f.text_field :linkstream_target_host %>
+  </p>
+
+  <p>
+    <%= f.label :linkstream_target_port, Network.human_attribute_name("linkstream_target_port") %><br/>
+    <%= f.text_field :linkstream_target_port %>
+  </p>
+
+  <p>
+    <%= f.label :linkstream_udp_port, Network.human_attribute_name("linkstream_udp_port") %><br/>
+    <%= f.text_field :linkstream_udp_port %>
+  </p>
+
+  <p>
+    <%= f.label :linkstream_http_port, Network.human_attribute_name("linkstream_http_port") %><br/>
+    <%= f.text_field :linkstream_http_port %>
+  </p>
+
+  <p>
+    <%= f.submit "Modifier" %>
+  </p>
+
+<% end %>
+
