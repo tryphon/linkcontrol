@@ -3,6 +3,9 @@ class Network < ActiveForm::Base
   @@configuration_file = "tmp/config.pp"
   cattr_accessor :configuration_file
 
+  @@system_update_command = nil
+  cattr_accessor :system_update_command
+
   attr_accessor :method
   attr_accessor :static_address
   attr_accessor :static_netmask
@@ -33,7 +36,11 @@ class Network < ActiveForm::Base
       end
     end
 
-    true
+    if system_update_command
+      system system_update_command
+    else
+      true
+    end
   rescue
     false
   end

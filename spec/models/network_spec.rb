@@ -13,6 +13,10 @@ describe Network do
   it "should use tmp/config.pp as default configuration file" do
     Network.configuration_file.should == "tmp/config.pp"
   end
+
+  it "should not have a system update command by default" do
+    Network.system_update_command.should be_nil
+  end
   
   describe "save" do
     
@@ -60,6 +64,18 @@ describe Network do
     it_should_configure :linkstream_target_port, :value => "14100"
     it_should_configure :linkstream_udp_port, :value => "14100"
     it_should_configure :linkstream_http_port, :value => "8000"
+
+    it "should run the system_update_command if defined" do
+      @network.stub!(:system_update_command).and_return("dummy")
+      @network.should_receive(:system).with(@network.system_update_command).and_return(true)
+      @network.save
+    end
+
+    it "should return false if the system_update_command isn't successfully executed" do
+      @network.stub!(:system_update_command).and_return("dummy")
+      @network.stub!(:systen).and_return(false)
+      @network.save.should be_false
+    end
 
   end
 
