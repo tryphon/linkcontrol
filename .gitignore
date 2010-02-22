@@ -7,3 +7,4 @@ tmp/*
 coverage/
 rerun.txt
 config.rb
+config/database.yml
