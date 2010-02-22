@@ -18,13 +18,30 @@ class Network < ActiveForm::Base
     names.each do |name|
       attr_accessor name
       define_method("#{name}=") do |value|
-        value = value.to_i
+        value = value.blank? ? nil : value.to_i
         instance_variable_set "@#{name}", value
       end
     end
   end
 
   acts_as_ip_port :linkstream_target_port, :linkstream_udp_port, :linkstream_http_port
+
+  def after_initialize
+    self.method ||= "dhcp"
+    self.static_address ||= "192.168.1.100"
+    self.static_netmask ||= "255.255.255.0"
+    self.static_gateway ||= "192.168.1.1"
+    self.static_dns1 ||= "192.168.1.1"
+
+    self.linkstream_target_host ||= "localhost"
+    self.linkstream_target_port ||= 14100
+    self.linkstream_udp_port ||= 14100
+    self.linkstream_http_port ||= 8000
+  end
+
+  def manual?
+    self.method == "static"
+  end
 
   def save
     File.open(configuration_file, "w") do |f|

@@ -10,6 +10,27 @@ describe Network do
     @network = Network.new
   end
 
+  describe "by default" do
+
+    def self.it_should_use(value, options)
+      attribute = options[:as] 
+      it "should use #{value} as #{attribute}" do
+        @network.send(attribute).should == value
+      end
+    end
+
+    it_should_use "dhcp", :as => :method
+    it_should_use "192.168.1.100", :as => :static_address
+    it_should_use "255.255.255.0", :as => :static_netmask
+    it_should_use "192.168.1.1", :as => :static_gateway
+    it_should_use "192.168.1.1", :as => :static_dns1
+
+    it_should_use "localhost", :as => :linkstream_target_host
+    it_should_use 14100, :as => :linkstream_target_port
+    it_should_use 14100, :as => :linkstream_udp_port
+    it_should_use 8000, :as => :linkstream_http_port
+  end
+
   it "should use tmp/config.pp as default configuration file" do
     Network.configuration_file.should == "tmp/config.pp"
   end
@@ -49,6 +70,7 @@ describe Network do
       end
 
       it "should configure #{configuration_key} even without value" do
+        @network.send("#{attribute}=", "")
         @network.save
         configuration.should include("$#{configuration_key}=\"\"")
       end
