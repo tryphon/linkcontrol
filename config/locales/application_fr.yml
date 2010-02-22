@@ -1,0 +1,13 @@
+fr:
+  activerecord:
+    attributes:
+      network:
+        method: Configuration
+        static_address: Adresse IP
+        static_netmask: Masque réseau
+        static_gateway: Passerelle
+        static_dns1: Serveur de nom
+        linkstream_target_host: Adresse de destination du flux
+        linkstream_target_port: Port de destination du flux
+        linkstream_http_port: Port HTTP local
+        linkstream_udp_port: Port de réception du flux
