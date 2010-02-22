@@ -6,6 +6,25 @@ describe NetworksController do
     @network = Network.new
   end
 
+  describe "GET 'show'" do
+    it "should be successful" do
+      get 'show'
+      response.should be_success
+    end
+
+    it "should render show view" do
+      get 'show'
+      response.should render_template("show")
+    end
+
+    it "should define @network by load a new instance" do
+      Network.should_receive(:load).and_return(@network)
+      get 'show'
+      assigns[:network].should == @network
+    end
+
+  end
+
   describe "GET 'edit'" do
     it "should be successful" do
       get 'edit'
@@ -48,14 +67,14 @@ describe NetworksController do
         @network.stub!(:save).and_return(true)
       end
       
-      it "should redirect to edit action" do
+      it "should redirect to network path" do
         post 'update'
-        response.should redirect_to(edit_network_path)
+        response.should redirect_to(network_path)
       end
 
       it "should define a flash notice" do
         post 'update'
-        flash.should have_key(:notice)
+        flash.should have_key(:success)
       end
 
     end

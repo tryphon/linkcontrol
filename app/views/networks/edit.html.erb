@@ -1,4 +1,4 @@
-<h1>Configuration</h1>
+<%= title_tag "Modifier la Configuration Réseau" %>
 
 <% form_for @network, :url => network_path do |f| %>
   <%= f.error_messages %>
@@ -49,7 +49,8 @@
   </p>
 
   <p>
-    <%= f.submit "Modifier" %>
+    <%= f.submit "Modifier" %> 
+    ou <%= link_to 'revenir &#8250;', network_path %>
   </p>
 
 <% end %>

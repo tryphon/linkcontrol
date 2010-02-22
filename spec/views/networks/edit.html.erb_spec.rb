@@ -1,12 +1,19 @@
 require 'spec_helper'
 
 describe "/networks/edit" do
+
   before(:each) do
-    render 'networks/edit'
+    assigns[:network] = @network = Network.new
   end
 
-  #Delete this example and add some real ones or delete this file
-  it "should tell you where to find the file" do
-    response.should have_tag('p', %r[Find me in app/views/networks/edit])
+  it "should display a field for static address" do    
+    render 'networks/edit'
+    response.should have_tag('input[name=?]', 'network[static_address]')
   end
+
+  it "should display an action to go back to the network path" do
+    render 'networks/edit'
+    response.should have_tag('a[href=?]', network_path)
+  end
+
 end

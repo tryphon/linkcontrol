@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 class NetworksController < ApplicationController
 
+  def show
+    @network = Network.load
+  end
+
   def edit
     @network = Network.load
   end
@@ -8,8 +12,8 @@ class NetworksController < ApplicationController
   def update
     @network = Network.new(params[:network])
     if @network.save
-      flash[:notice] = "La configuration a été modifiée avec succès"
-      redirect_to edit_network_path
+      flash[:success] = "La configuration a été modifiée avec succès"
+      redirect_to network_path
     else
       flash[:failure] = "La configuration n'a pu été modifiée"
       render :action => "edit"
