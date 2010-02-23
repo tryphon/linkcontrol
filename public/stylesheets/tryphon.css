@@ -28,7 +28,7 @@ img {
   height: 100px;
   width: 750px;
   margin: 0 auto;
-  background: url("../images/pigebox.png") no-repeat 0px 30px;
+  background: url("../images/linkbox.png") no-repeat 0px 30px;
 }
 #header h1 { text-indent: -999px; }
 #menu {
@@ -39,7 +39,7 @@ img {
 #menu li {
   float: left;
   margin: 0 0 0 8px;
-  background-color: #1273b4;
+  background-color: #ea5d05;
 }
 #menu li a {
   display: block;
@@ -78,15 +78,15 @@ img {
 }
 #content h1 {
   font-size: 145%;
-  color: #1273b4;
+  color: #ea5d05;
   margin: 6px 0;
 }
 #content h3 {
-  color: #1273b4;
+  color: #ea5d05;
   margin: 6px 0;
   font-weight: bold;
 }
-#content h3 a { color: #1273b4; }
+#content h3 a { color: #ea5d05; }
 #content p { margin: 0 0 0 6px; }
 #content p.note {
   margin: 0;
