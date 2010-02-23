@@ -7,6 +7,7 @@ describe "/networks/show" do
   end
 
   it "should display the static address" do    
+    @network.method = "static"
     @network.static_address = "dummy"
     render 'networks/show'
     response.should have_text(/#{@network.static_address}/)
