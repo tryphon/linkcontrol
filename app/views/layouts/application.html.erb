@@ -17,8 +17,8 @@
     <div id="header">
       <div>
         <ul id="menu">
-          <li><%= link_to "Tableau de bord", "#" %></li>
-          <li><a href="#">Aide</a></li>
+          <li><%= link_to t(".dashboard"), "#" %></li>
+          <li><a href="#"><%= t(".help") %></a></li>
         </ul>
       </div>
     </div>
@@ -34,12 +34,12 @@
         <h2>LinkBox<sup>beta</sup></h2>
 
         <ul>
-          <li><%= link_to "Configuration réseau", network_path %></li>
+          <li><%= link_to Network.human_name, network_path %></li>
         </ul>
 
-        <h2>Information</h2>
+        <h2><%= t(".information.title") %></h2>
         <p>
-          Pour plus d'information à propos de <%= link_to "LinkBox", "http://www.tryphon.eu/fr/produits/linkbox" %>, visitez notre site&nbsp;: <%= link_to "tryphon.eu", "http://www.tryphon.eu/fr" %>
+          <%= t(".information.text") %>
         </p>
       </div>
     </div>

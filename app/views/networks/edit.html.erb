@@ -1,4 +1,4 @@
-<%= title_tag "Modifier la Configuration Réseau" %>
+<%= title_tag t(".title") %>
 
 <% form_for @network, :url => network_path do |f| %>
   <%= f.error_messages %>
@@ -7,6 +7,8 @@
     <%= f.label :method, Network.human_attribute_name("method") %><br/>
     <%= f.text_field :method %>
   </p>
+
+  <h3><%= t("networks.static_properties") %></h3>
 
   <p>
     <%= f.label :static_address, Network.human_attribute_name("static_address") %><br/>
@@ -28,6 +30,8 @@
     <%= f.text_field :static_dns1 %>
   </p>
 
+  <h3><%= t("networks.target_properties") %></h3>
+
   <p>
     <%= f.label :linkstream_target_host, Network.human_attribute_name("linkstream_target_host") %><br/>
     <%= f.text_field :linkstream_target_host %>
@@ -37,6 +41,8 @@
     <%= f.label :linkstream_target_port, Network.human_attribute_name("linkstream_target_port") %><br/>
     <%= f.text_field :linkstream_target_port %>
   </p>
+
+  <h3><%= t("networks.local_ports_properties") %></h3>
 
   <p>
     <%= f.label :linkstream_udp_port, Network.human_attribute_name("linkstream_udp_port") %><br/>
@@ -49,8 +55,8 @@
   </p>
 
   <p>
-    <%= f.submit "Modifier" %> 
-    ou <%= link_to 'revenir &#8250;', network_path %>
+    <%= f.submit t(".submit") %> 
+    <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", network_path %>
   </p>
 
 <% end %>

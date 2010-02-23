@@ -1,5 +1,4 @@
-<%= title_tag "Configuration Réseau" %>
-
+<%= title_tag Network.human_name %>
 
 <div class="description">
   <p>
@@ -8,7 +7,7 @@
   </p>
   
   <% if @network.manual? %>
-  <h3>Configuration manuelle</h3>
+  <h3><%= t("networks.static_properties") %></h3>
 
   <p>
   <%= Network.human_attribute_name("static_address") %> :
@@ -31,7 +30,7 @@
   </p>
   <% end %>
 
-  <h3>Destination du flux</h3>
+  <h3><%= t("networks.target_properties") %></h3>
 
   <p>
   <%= Network.human_attribute_name("linkstream_target_host") %> :
@@ -43,7 +42,7 @@
   <%= @network.linkstream_target_port %>
   </p>
 
-  <h3>Ports locaux</h3>
+  <h3><%= t("networks.local_ports_properties") %></h3>
 
   <p>
   <%= Network.human_attribute_name("linkstream_udp_port") %> :
@@ -58,5 +57,5 @@
 </div>
 
 <div class="actions">
-  <%= link_to 'Modifier', edit_network_path, :class => "edit" %>
+  <%= link_to t("actions.edit"), edit_network_path, :class => "edit" %>
 </div>

@@ -1,0 +1,34 @@
+en:
+  activerecord:
+    attributes:
+      network:
+        method: Configuration
+        static_address: IP address
+        static_netmask: Network mask
+        static_gateway: Gateway
+        static_dns1: DNS server
+        linkstream_target_host: Stream target host
+        linkstream_target_port: Stream target port
+        linkstream_http_port: Local HTTP port
+        linkstream_udp_port: Local UDP port
+    models:
+      network: Network configuration
+  networks:
+    static_properties: Manual configuration
+    target_properties: Stream target
+    local_ports_properties: Local ports
+    edit:
+      title: Edit the manual configuration
+      submit: Edit
+      cancel: back
+  layouts:
+    application:
+      dashboard: Dashboard
+      help: Help
+      information: 
+        title: Information
+        text: | 
+          For more information about <a href="http://www.tryphon.eu/fr/produits/linkbox">LinkBox</a>, please visit our website: <a href="http://www.tryphon.eu/fr">tryphon.eu</a>
+  or: or
+  actions:
+    edit: Edit

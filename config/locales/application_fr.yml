@@ -11,3 +11,24 @@ fr:
         linkstream_target_port: Port de destination du flux
         linkstream_http_port: Port HTTP local
         linkstream_udp_port: Port de réception du flux
+    models:
+      network: Configuration réseau
+  networks:
+    static_properties: Configuration manuelle
+    target_properties: Destination du flux
+    local_ports_properties: Ports locaux
+    edit:
+      title: Modifier la Configuration réseau
+      submit: Modifier
+      cancel: revenir
+  layouts:
+    application:
+      dashboard: Tableau de bord
+      help: Aide
+      information: 
+        title: Information
+        text: | 
+          Pour plus d'information à propos de <a href="http://www.tryphon.eu/fr/produits/linkbox">LinkBox</a>, visitez notre site&nbsp;: <a href="http://www.tryphon.eu/fr">tryphon.eu</a>
+  or: ou
+  actions:
+    edit: Modifier
