@@ -13,6 +13,7 @@ fr:
         linkstream_udp_port: Port de réception du flux
     models:
       network: Configuration réseau     
+      save_point: Sauver la configuration     
     errors:
       models:
         network:
@@ -35,6 +36,9 @@ fr:
       title: Modifier la Configuration réseau
       submit: Modifier
       cancel: revenir
+  save_points:
+    new:
+      submit: Sauvegarder
   layouts:
     application:
       dashboard: Tableau de bord

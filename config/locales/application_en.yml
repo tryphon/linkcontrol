@@ -13,6 +13,7 @@ en:
         linkstream_udp_port: Local UDP port
     models:
       network: Network configuration
+      save_point: Save configuration
   networks:
     static_properties: Manual configuration
     target_properties: Stream target
@@ -21,6 +22,9 @@ en:
       title: Edit the manual configuration
       submit: Edit
       cancel: back
+  save_points:
+    new:
+      submit: Save
   layouts:
     application:
       dashboard: Dashboard

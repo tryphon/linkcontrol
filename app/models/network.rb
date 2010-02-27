@@ -150,8 +150,14 @@ class Network < ActiveForm::Base
   end
 
   def must_found_linkstream_target_host
+    return unless errors.on(linkstream_target_host).blank?
+
     begin
-      Socket.gethostbyname(linkstream_target_host)
+      if linkstream_target_host =~ /[0-9.]+/
+        IPAddr.new(linkstream_target_host, Socket::AF_INET)
+      else
+        Socket.gethostbyname(linkstream_target_host)
+      end
     rescue
       errors.add(:linkstream_target_host, :not_valid_hostname)
     end
