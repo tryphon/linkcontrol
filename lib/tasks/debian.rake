@@ -9,12 +9,11 @@ begin
       t.version = '0.1'
       t.debian_increment = 1
 
-      t.source_provider = GitExportProvider.new
-      # t.source_provider = GitExportProvider.new do |source_directory|
-      #   Dir.chdir("vendor/plugins/user_interface") do 
-      #     sh "git archive --prefix=vendor/plugins/user_interface/ HEAD | tar -xf - -C #{source_directory}"      
-      #   end
-      # end
+      t.source_provider = GitExportProvider.new do |source_directory|
+        Dir.chdir("vendor/plugins/user_interface") do 
+          sh "git archive --prefix=vendor/plugins/user_interface/ HEAD | tar -xf - -C #{source_directory}"      
+        end
+      end
     end
   end
 
