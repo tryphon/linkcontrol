@@ -12,7 +12,21 @@ fr:
         linkstream_http_port: Port HTTP local
         linkstream_udp_port: Port de réception du flux
     models:
-      network: Configuration réseau
+      network: Configuration réseau     
+    errors:
+      models:
+        network:
+          not_a_user_port: "n'est pas un port utilisable (entre 1025 et 65535)"
+          not_a_valid_ip_address: "n'est pas une adresse IP valide"
+          can_be_the_static_address: "ne peut être l'adresse IP de la box"
+          attributes:
+            static_netmask:
+              not_a_valid_netmask: "n'est pas un masque réseau valide"
+            static_gateway:
+              not_in_local_network: "n'est pas dans le réseau local"
+            linkstream_target_host:
+              not_valid_hostname: "'{{value}}' ne peut être trouvée"
+ 
   networks:
     static_properties: Configuration manuelle
     target_properties: Destination du flux

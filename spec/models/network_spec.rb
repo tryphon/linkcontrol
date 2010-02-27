@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Network do
@@ -38,6 +39,97 @@ describe Network do
   it "should not have a system update command by default" do
     Network.system_update_command.should be_nil
   end
+
+  it { should validate_inclusion_of :method, :in => %w{dhcp static} }
+
+  describe "when method is static" do
+
+    before(:each) do
+      @network.method = "static"
+      @network.static_netmask = "0.0.0.0"
+    end
+
+    it "should validate presence of static attributes" do
+      @network.should validate_presence_of(:static_address, :static_netmask, :static_gateway, :static_dns1) 
+    end
+
+    def self.it_should_validate_ip_address(attribute)
+      it "should validate that #{attribute} is a valid ip address" do
+        @network.should allow_values_for(attribute, "192.168.0.1", "172.10.10.1", "10.0.0.254")
+        @network.should_not allow_values_for(attribute, "192.168.0", "192.168.0.256", "abc")
+      end
+    end
+
+    it_should_validate_ip_address :static_address
+    it_should_validate_ip_address :static_dns1
+
+    it "should validate that static dns1 is not the static address" do
+      @network.should allow_values_for(:static_dns1, @network.static_address)
+    end
+
+    describe "default gateway" do
+
+      before(:each) do
+        @network.static_address = "192.168.0.10"
+        @network.static_netmask = "255.255.255.0"
+      end
+
+      it "should be a valid ip address" do
+        @network.should allow_values_for(:static_gateway, "192.168.0.1")
+        @network.should_not allow_values_for(:static_gateway, "192.168.0", "192.168.0.256", "abc")
+      end
+
+      it "should be in local network" do
+        @network.should_not allow_values_for(:static_gateway, "172.10.0.1")
+      end
+
+      it "should be the static ip address" do
+        @network.should_not allow_values_for(:static_gateway, @network.static_address)
+      end
+      
+    end
+
+    
+  end
+
+  describe "when method is dhcp" do
+
+    before(:each) do
+      @network.method = "dhcp"
+    end
+
+    it "should not validate presence of static attributes" do
+      @network.should_not validate_presence_of(:static_address, :static_netmask, :static_gateway, :static_dns1) 
+    end
+
+  end
+
+  it "should accept a blank linkstream_target_host" do
+    @network.should allow_values_for(:linkstream_target_host, "")
+  end
+
+  it "should accept a blank linkstream_target_port" do
+    @network.should allow_values_for(:linkstream_target_port, "")
+  end
+
+  def self.it_should_use_default_port_for(attribute, type)
+    it "should use default port when #{attribute} is not specified" do
+      @network.send("#{attribute}=", nil)
+      @network.valid?
+      @network.send(attribute).should == @network.send("default_#{type}_port")
+    end
+  end
+
+  it_should_use_default_port_for :linkstream_target_port, :udp
+  it_should_use_default_port_for :linkstream_udp_port, :udp
+  it_should_use_default_port_for :linkstream_http_port, :http
+
+  it { pending; should validate_numericality_of(:linkstream_target_port, :linkstream_udp_port,:linkstream_http_port, :only_integer => true, :greater_than => 1024, :less_than => 65536) }
+
+  it "should validate that linkstream_target_host is a valid hostname" do
+    @network.should allow_values_for(:linkstream_target_host, "localhost", "192.168.0.1")
+    @network.should_not allow_values_for(:linkstream_target_host, "dummy", "192.168.0")
+  end
   
   describe "save" do
     
@@ -47,6 +139,17 @@ describe Network do
 
     def configuration
       File.readlines(Network.configuration_file).collect(&:strip)
+    end
+
+    it "should return false if the network isn't valid" do
+      @network.stub!(:valid?).and_return(false)
+      @network.save.should be_false
+    end
+
+    it "should not modifiy configuration fie if not valid" do
+      @network.stub!(:valid?).and_return(false)
+      @network.save
+      File.exists?(@network.configuration_file).should be_false
     end
 
     it "should return true if the configuration is saved" do
@@ -71,6 +174,7 @@ describe Network do
 
       it "should configure #{configuration_key} even without value" do
         @network.send("#{attribute}=", "")
+        @network.stub!(:valid?).and_return(true)
         @network.save
         configuration.should include("$#{configuration_key}=\"\"")
       end

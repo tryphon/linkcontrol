@@ -1,3 +1,6 @@
+require 'ipaddr'
+require 'socket'
+
 class Network < ActiveForm::Base
 
   @@configuration_file = "tmp/config.pp"
@@ -6,11 +9,14 @@ class Network < ActiveForm::Base
   @@system_update_command = nil
   cattr_accessor :system_update_command
 
+  @@default_udp_port = 14100
+  cattr_accessor :default_udp_port
+
+  @@default_http_port = 8000
+  cattr_accessor :default_http_port
+
   attr_accessor :method
-  attr_accessor :static_address
-  attr_accessor :static_netmask
-  attr_accessor :static_gateway
-  attr_accessor :static_dns1
+  attr_accessor :static_address, :static_netmask, :static_gateway, :static_dns1
 
   attr_accessor :linkstream_target_host
 
@@ -21,10 +27,21 @@ class Network < ActiveForm::Base
         value = value.blank? ? nil : value.to_i
         instance_variable_set "@#{name}", value
       end
+      validates_numericality_of name, :only_integer => true, :greater_than => 1024, :less_than => 65536, :message => :not_a_user_port
     end
   end
 
   acts_as_ip_port :linkstream_target_port, :linkstream_udp_port, :linkstream_http_port
+
+  validates_inclusion_of :method, :in => %w{dhcp static}
+
+  with_options :if => :manual? do |static|
+    static.validates_presence_of :static_address, :static_netmask, :static_gateway, :static_dns1
+    static.validate :must_use_valid_ip_addresses
+    static.validate :must_use_valid_gateway_in_network
+  end
+
+  validate :must_found_linkstream_target_host
 
   def after_initialize
     self.method ||= "dhcp"
@@ -34,9 +51,16 @@ class Network < ActiveForm::Base
     self.static_dns1 ||= "192.168.1.1"
 
     self.linkstream_target_host ||= "localhost"
-    self.linkstream_target_port ||= 14100
-    self.linkstream_udp_port ||= 14100
-    self.linkstream_http_port ||= 8000
+
+    use_default_ports
+  end
+
+  before_validation :use_default_ports
+
+  def use_default_ports
+    self.linkstream_target_port ||= default_udp_port
+    self.linkstream_udp_port ||= default_udp_port
+    self.linkstream_http_port ||= default_http_port
   end
 
   def manual?
@@ -44,6 +68,8 @@ class Network < ActiveForm::Base
   end
 
   def save
+    return false unless valid?
+
     File.open(configuration_file, "w") do |f|
       Network.attribute_names.each do |attribute|
         value = send(attribute)
@@ -80,6 +106,54 @@ class Network < ActiveForm::Base
   def self.load
     Network.new.tap do |network|
       network.load
+    end
+  end
+
+  private
+
+  def must_use_valid_ip_addresses
+    [:static_address, :static_gateway, :static_dns1].each do |attribute|
+      begin
+        IPAddr.new(send(attribute), Socket::AF_INET) if errors.on(attribute).blank?
+      rescue
+        errors.add(attribute, :not_a_valid_ip_address)
+      end
+    end
+
+    if errors.on(:static_address).blank? and errors.on(:static_netmask).blank?
+      begin
+        IPAddr.new("#{static_address}/#{static_netmask}", Socket::AF_INET)
+      rescue
+        errors.add(:static_netmask, :not_a_valid_netmask)
+      end
+    end
+  end
+
+  def must_use_valid_gateway_in_network
+    if errors.on(:static_address).blank? and errors.on(:static_netmask).blank? and errors.on(:static_gateway).blank?
+      if static_address == static_gateway
+        errors.add(:static_gateway, :can_be_the_static_address)
+      end
+
+      unless IPAddr.new("#{static_address}/#{static_netmask}", Socket::AF_INET).include?(IPAddr.new(static_gateway))
+        errors.add(:static_gateway, :not_in_local_network)
+      end
+    end
+  end
+
+  def must_use_valid_dns
+    if errors.on(:static_address).blank? and errors.on(:static_dns1).blank?
+      if static_address == static_dns1
+        errors.add(:static_dns1, :can_be_the_static_address)
+      end
+    end
+  end
+
+  def must_found_linkstream_target_host
+    begin
+      Socket.gethostbyname(linkstream_target_host)
+    rescue
+      errors.add(:linkstream_target_host, :not_valid_hostname)
     end
   end
 
