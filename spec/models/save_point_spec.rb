@@ -6,27 +6,23 @@ describe SavePoint do
     @save_point = SavePoint.new
   end
 
-  it "should use Network configuration file as transient file" do
-    @save_point.transient_file.should == Network.configuration_file
+  it "should use '/bin/true' as default save command" do
+    @save_point.save_command.should == '/bin/true'
   end
 
-  it "should use 'tmp/config_saved.pp' as default persistent file" do
-    @save_point.persistent_file.should == 'tmp/config_saved.pp'
-  end
-
-  it "should return true if persistent file is successfully modified" do
+  it "should return true if save command is successfully modified" do
     @save_point.save.should be_true
   end
 
-  it "should return false if persistent file can be modified" do
-    @save_point.stub!(:persistent_file).and_return("/dummy")
+  it "should return false if save command isn't successful" do
+    @save_point.stub!(:save_command).and_return("/bin/false")
     @save_point.save.should be_false
   end
 
-  it "should copy transient file in persistent one" do
-    File.open(@save_point.transient_file, "w") { |f| f.write "dummy" }
+  it "should execute the save command when saves" do
+    @save_point.stub!(:save_command).and_return("dummy")
+    @save_point.should_receive(:system).with("dummy")
     @save_point.save
-    File.read(@save_point.persistent_file).should == "dummy"
   end
 
 end
