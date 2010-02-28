@@ -29,7 +29,9 @@ fr:
               not_valid_hostname: "'{{value}}' ne peut être trouvée"
  
   networks:
-    static_properties: Configuration manuelle
+    method:
+      static: Configuration manuelle
+      dhcp: Configuration automatique (via DHCP)
     target_properties: Destination du flux
     local_ports_properties: Ports locaux
     edit:

@@ -4,16 +4,20 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :method, Network.human_attribute_name("method") %><br/>
-    <%= f.text_field :method %>
+    <%= f.radio_button :method, "dhcp" %>
+    <%= f.label :method_dhcp, NetworkPresenter.dhcp_method_name %><br/>
   </p>
 
-  <h3><%= t("networks.static_properties") %></h3>
+  <fieldset id="network_static_inputs">
+    <legend>
+      <%= f.radio_button :method, "static" %>
+      <%= f.label :method_static, NetworkPresenter.static_method_name %>
+    </legend>
 
-  <p>
+    <p>
     <%= f.label :static_address, Network.human_attribute_name("static_address") %><br/>
     <%= f.text_field :static_address %>
-  </p>
+    </p>
 
   <p>
     <%= f.label :static_netmask, Network.human_attribute_name("static_netmask") %><br/>
@@ -29,6 +33,7 @@
     <%= f.label :static_dns1, Network.human_attribute_name("static_dns1") %><br/>
     <%= f.text_field :static_dns1 %>
   </p>
+  </fieldset>
 
   <h3><%= t("networks.target_properties") %></h3>
 

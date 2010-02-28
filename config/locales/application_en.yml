@@ -15,7 +15,9 @@ en:
       network: Network configuration
       save_point: Save configuration
   networks:
-    static_properties: Manual configuration
+    method:
+      static: Manual configuration
+      dhcp: Automatic configuration (via DHCP)
     target_properties: Stream target
     local_ports_properties: Local ports
     edit:
