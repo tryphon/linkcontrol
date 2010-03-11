@@ -29,31 +29,6 @@
   <%= @network.static_dns1 %>
   </p>
   <% end %>
-
-  <h3><%= t("networks.target_properties") %></h3>
-
-  <p>
-  <%= Network.human_attribute_name("linkstream_target_host") %> :
-  <%= @network.linkstream_target_host %>
-  </p>
-
-  <p>
-  <%= Network.human_attribute_name("linkstream_target_port") %> :
-  <%= @network.linkstream_target_port %>
-  </p>
-
-  <h3><%= t("networks.local_ports_properties") %></h3>
-
-  <p>
-  <%= Network.human_attribute_name("linkstream_udp_port") %> :
-  <%= @network.linkstream_udp_port %>
-  </p>
-
-  <p>
-  <%= Network.human_attribute_name("linkstream_http_port") %> :
-  <%= @network.linkstream_http_port %>
-  </p>
-
 </div>
 
 <div class="actions">

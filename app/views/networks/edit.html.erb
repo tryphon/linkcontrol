@@ -35,30 +35,6 @@
   </p>
   </fieldset>
 
-  <h3><%= t("networks.target_properties") %></h3>
-
-  <p>
-    <%= f.label :linkstream_target_host, Network.human_attribute_name("linkstream_target_host") %><br/>
-    <%= f.text_field :linkstream_target_host %>
-  </p>
-
-  <p>
-    <%= f.label :linkstream_target_port, Network.human_attribute_name("linkstream_target_port") %><br/>
-    <%= f.text_field :linkstream_target_port %>
-  </p>
-
-  <h3><%= t("networks.local_ports_properties") %></h3>
-
-  <p>
-    <%= f.label :linkstream_udp_port, Network.human_attribute_name("linkstream_udp_port") %><br/>
-    <%= f.text_field :linkstream_udp_port %>
-  </p>
-
-  <p>
-    <%= f.label :linkstream_http_port, Network.human_attribute_name("linkstream_http_port") %><br/>
-    <%= f.text_field :linkstream_http_port %>
-  </p>
-
   <p>
     <%= f.submit t(".submit") %> 
     <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", network_path %>

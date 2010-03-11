@@ -1,0 +1,36 @@
+<%= title_tag t(".title") %>
+
+<% form_for @link_stream, :url => link_stream_path do |f| %>
+  <%= f.error_messages %>
+
+  <h3><%= t("link_streams.target_properties") %></h3>
+
+  <p>
+    <%= f.label :target_host, LinkStream.human_attribute_name("target_host") %><br/>
+    <%= f.text_field :target_host %>
+  </p>
+
+  <p>
+    <%= f.label :target_port, LinkStream.human_attribute_name("target_port") %><br/>
+    <%= f.text_field :target_port %>
+  </p>
+
+  <h3><%= t("link_streams.local_ports_properties") %></h3>
+
+  <p>
+    <%= f.label :udp_port, LinkStream.human_attribute_name("udp_port") %><br/>
+    <%= f.text_field :udp_port %>
+  </p>
+
+  <p>
+    <%= f.label :http_port, LinkStream.human_attribute_name("http_port") %><br/>
+    <%= f.text_field :http_port %>
+  </p>
+
+  <p>
+    <%= f.submit t(".submit") %> 
+    <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", link_stream_path %>
+  </p>
+
+<% end %>
+

@@ -4,11 +4,15 @@ require 'spec_helper'
 describe Network do
 
   def delete_configuration_file
-    File.delete(Network.configuration_file) if File.exists?(Network.configuration_file)
+    File.delete(PuppetConfiguration.configuration_file) if File.exists?(PuppetConfiguration.configuration_file)
   end
 
   before(:each) do
     @network = Network.new
+  end
+
+  after(:each) do
+    delete_configuration_file
   end
 
   describe "by default" do
@@ -25,19 +29,6 @@ describe Network do
     it_should_use "255.255.255.0", :as => :static_netmask
     it_should_use "192.168.1.1", :as => :static_gateway
     it_should_use "192.168.1.1", :as => :static_dns1
-
-    it_should_use "localhost", :as => :linkstream_target_host
-    it_should_use 14100, :as => :linkstream_target_port
-    it_should_use 14100, :as => :linkstream_udp_port
-    it_should_use 8000, :as => :linkstream_http_port
-  end
-
-  it "should use tmp/config.pp as default configuration file" do
-    Network.configuration_file.should == "tmp/config.pp"
-  end
-
-  it "should not have a system update command by default" do
-    Network.system_update_command.should be_nil
   end
 
   it { should validate_inclusion_of :method, :in => %w{dhcp static} }
@@ -103,42 +94,12 @@ describe Network do
     end
 
   end
-
-  it "should accept a blank linkstream_target_host" do
-    @network.should allow_values_for(:linkstream_target_host, "")
-  end
-
-  it "should accept a blank linkstream_target_port" do
-    @network.should allow_values_for(:linkstream_target_port, "")
-  end
-
-  def self.it_should_use_default_port_for(attribute, type)
-    it "should use default port when #{attribute} is not specified" do
-      @network.send("#{attribute}=", nil)
-      @network.valid?
-      @network.send(attribute).should == @network.send("default_#{type}_port")
-    end
-  end
-
-  it_should_use_default_port_for :linkstream_target_port, :udp
-  it_should_use_default_port_for :linkstream_udp_port, :udp
-  it_should_use_default_port_for :linkstream_http_port, :http
-
-  it { pending; should validate_numericality_of(:linkstream_target_port, :linkstream_udp_port,:linkstream_http_port, :only_integer => true, :greater_than => 1024, :less_than => 65536) }
-
-  it "should validate that linkstream_target_host is a valid hostname" do
-    @network.should allow_values_for(:linkstream_target_host, "localhost", "192.168.0.1")
-    @network.should_not allow_values_for(:linkstream_target_host, "dummy", "192.168.0")
-  end
   
   describe "save" do
     
     before(:each) do
-      delete_configuration_file
-    end
-
-    def configuration
-      File.readlines(Network.configuration_file).collect(&:strip)
+      @puppet_configuration = PuppetConfiguration.new
+      PuppetConfiguration.stub!(:load).and_return(@puppet_configuration)
     end
 
     it "should return false if the network isn't valid" do
@@ -146,10 +107,10 @@ describe Network do
       @network.save.should be_false
     end
 
-    it "should not modifiy configuration fie if not valid" do
+    it "should not modifiy puppet configuration if not valid" do
       @network.stub!(:valid?).and_return(false)
       @network.save
-      File.exists?(@network.configuration_file).should be_false
+      @puppet_configuration.should be_empty
     end
 
     it "should return true if the configuration is saved" do
@@ -157,7 +118,7 @@ describe Network do
     end
 
     it "should return false if the configuration can't be saved" do
-      @network.stub!(:configuration_file).and_return("/dummy")
+      @puppet_configuration.stub!(:save).and_return(false)
       @network.save.should be_false
     end
 
@@ -168,15 +129,7 @@ describe Network do
       it "should configure #{attribute} as #{configuration_key}" do
         @network.send("#{attribute}=", value)
         @network.save
-      
-        configuration.should include("$#{configuration_key}=\"#{value}\"")
-      end
-
-      it "should configure #{configuration_key} even without value" do
-        @network.send("#{attribute}=", "")
-        @network.stub!(:valid?).and_return(true)
-        @network.save
-        configuration.should include("$#{configuration_key}=\"\"")
+        @puppet_configuration[configuration_key].should == value
       end
     end
 
@@ -186,35 +139,13 @@ describe Network do
     it_should_configure :static_gateway, :as => "network_static_gateway", :value => "192.168.1.1"
     it_should_configure :static_dns1, :as => "network_static_dns1", :value => "192.168.1.1"
 
-    it_should_configure :linkstream_target_host, :value => "localhost"
-    it_should_configure :linkstream_target_port, :value => "14100"
-    it_should_configure :linkstream_udp_port, :value => "14100"
-    it_should_configure :linkstream_http_port, :value => "8000"
-
-    it "should run the system_update_command if defined" do
-      @network.stub!(:system_update_command).and_return("dummy")
-      @network.should_receive(:system).with(@network.system_update_command).and_return(true)
-      @network.save
-    end
-
-    it "should return false if the system_update_command isn't successfully executed" do
-      @network.stub!(:system_update_command).and_return("dummy")
-      @network.stub!(:systen).and_return(false)
-      @network.save.should be_false
-    end
-
   end
 
   describe "load" do
     
-    def configuration_with(key, value)
-      File.open(Network.configuration_file, "w") do |f|
-        f.puts "$#{key}=\"#{value}\""
-      end
-    end
-
-    after(:each) do
-      delete_configuration_file
+    before(:each) do
+      @puppet_configuration = PuppetConfiguration.new
+      PuppetConfiguration.stub!(:load).and_return(@puppet_configuration)
     end
 
     def self.it_should_use(configuration_key, options = {})
@@ -222,7 +153,7 @@ describe Network do
       value = options[:value]
 
       it "should use #{configuration_key} as #{attribute} attribute" do
-        configuration_with(configuration_key, value)
+        @puppet_configuration[configuration_key] = value
         @network.load
         @network.send(attribute).should == value
       end
@@ -234,11 +165,6 @@ describe Network do
     it_should_use :network_static_gateway, :as => :static_gateway, :value => "192.168.1.1"
     it_should_use :network_static_dns1, :as => :static_dns1, :value => "192.168.1.1"
 
-    it_should_use :linkstream_target_host, :value => "localhost"
-    it_should_use :linkstream_target_port, :value => 14100
-    it_should_use :linkstream_udp_port, :value => 14100
-    it_should_use :linkstream_http_port, :value => 8000
-
   end
 
   describe "class method load" do
@@ -249,6 +175,10 @@ describe Network do
       Network.load.should == @network
     end
 
+  end
+
+  it "should not be a new record" do
+    @network.should_not be_new_record
   end
 
 end

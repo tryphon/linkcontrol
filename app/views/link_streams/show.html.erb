@@ -1,0 +1,31 @@
+<%= title_tag LinkStream.human_name %>
+
+<div class="description">
+  <h3><%= t("link_streams.target_properties") %></h3>
+
+  <p>
+  <%= LinkStream.human_attribute_name("target_host") %> :
+  <%= @link_stream.target_host %>
+  </p>
+
+  <p>
+  <%= LinkStream.human_attribute_name("target_port") %> :
+  <%= @link_stream.target_port %>
+  </p>
+
+  <h3><%= t("link_streams.local_ports_properties") %></h3>
+
+  <p>
+  <%= LinkStream.human_attribute_name("udp_port") %> :
+  <%= @link_stream.udp_port %>
+  </p>
+
+  <p>
+  <%= LinkStream.human_attribute_name("http_port") %> :
+  <%= @link_stream.http_port %>
+  </p>
+</div>
+
+<div class="actions">
+  <%= link_to t("actions.edit"), edit_link_stream_path, :class => "edit" %>
+</div>

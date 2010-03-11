@@ -7,11 +7,13 @@ fr:
         static_netmask: Masque réseau
         static_gateway: Passerelle
         static_dns1: Serveur de nom
-        linkstream_target_host: Adresse de destination du flux
-        linkstream_target_port: Port de destination du flux
-        linkstream_http_port: Port HTTP local
-        linkstream_udp_port: Port de réception du flux
+      link_stream:
+        target_host: Adresse de destination
+        target_port: Port de destination
+        http_port: Port HTTP local
+        udp_port: Port de réception
     models:
+      link_stream: Configuration du flux
       network: Configuration réseau     
       save_point: Sauver la configuration     
     errors:
@@ -32,10 +34,15 @@ fr:
     method:
       static: Configuration manuelle
       dhcp: Configuration automatique (via DHCP)
+    edit:
+      title: Modifier la Configuration réseau
+      submit: Modifier
+      cancel: revenir
+  link_streams:
     target_properties: Destination du flux
     local_ports_properties: Ports locaux
     edit:
-      title: Modifier la Configuration réseau
+      title: Modifier la Configuration du flux
       submit: Modifier
       cancel: revenir
   save_points:
