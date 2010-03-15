@@ -20,6 +20,8 @@ en:
     method:
       static: Manual configuration
       dhcp: Automatic configuration (via DHCP)
+    show:
+      static_properties: Manual parameters
     edit:
       title: Edit the network configuration
       submit: Edit

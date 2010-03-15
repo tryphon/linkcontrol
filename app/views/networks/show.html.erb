@@ -2,31 +2,30 @@
 
 <div class="description">
   <p>
-  <%= Network.human_attribute_name("method") %> :
-  <%= @network.method %>
+    <%= @network.presenter.method_name %>
   </p>
   
   <% if @network.manual? %>
-  <h3><%= t("networks.static_properties") %></h3>
+  <h3><%= t(".static_properties") %></h3>
 
   <p>
-  <%= Network.human_attribute_name("static_address") %> :
-  <%= @network.static_address %>
+    <%= Network.human_attribute_name("static_address") %> :
+    <%= @network.static_address %>
   </p>
 
   <p>
-  <%= Network.human_attribute_name("static_netmask") %> :
-  <%= @network.static_netmask %>
+    <%= Network.human_attribute_name("static_netmask") %> :
+    <%= @network.static_netmask %>
   </p>
 
   <p>
-  <%= Network.human_attribute_name("static_gateway") %> :
-  <%= @network.static_gateway %>
+    <%= Network.human_attribute_name("static_gateway") %> :
+    <%= @network.static_gateway %>
   </p>
 
   <p>
-  <%= Network.human_attribute_name("static_dns1") %> :
-  <%= @network.static_dns1 %>
+    <%= Network.human_attribute_name("static_dns1") %> :
+    <%= @network.static_dns1 %>
   </p>
   <% end %>
 </div>

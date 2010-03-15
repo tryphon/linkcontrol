@@ -6,6 +6,12 @@ describe "/networks/show" do
     assigns[:network] = @network = Network.new
   end
 
+  it "should display method name" do
+    @network.stub!(:presenter).and_return(mock(NetworkPresenter, :method_name => "dummy"))
+    render 'networks/show'
+    response.should have_text(/dummy/)
+  end
+
   it "should display the static address" do    
     @network.method = "static"
     @network.static_address = "dummy"

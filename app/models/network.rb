@@ -43,6 +43,10 @@ class Network < ActiveForm::Base
     Network.new.tap(&:load)
   end
 
+  def presenter
+    @presenter ||= NetworkPresenter.new(self)
+  end
+
   private
 
   def must_use_valid_ip_addresses

@@ -29,11 +29,12 @@ fr:
               not_in_local_network: "n'est pas dans le réseau local"
             linkstream_target_host:
               not_valid_hostname: "'{{value}}' ne peut être trouvée"
- 
   networks:
     method:
       static: Configuration manuelle
       dhcp: Configuration automatique (via DHCP)
+    show:
+      static_properties: Paramètres manuels
     edit:
       title: Modifier la Configuration réseau
       submit: Modifier
