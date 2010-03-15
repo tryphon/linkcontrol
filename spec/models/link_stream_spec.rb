@@ -55,7 +55,7 @@ describe LinkStream do
       PuppetConfiguration.stub!(:load).and_return(@puppet_configuration)
     end
 
-    it "should return false if the network isn't valid" do
+    it "should return false if not valid" do
       @link_stream.stub!(:valid?).and_return(false)
       @link_stream.save.should be_false
     end

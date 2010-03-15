@@ -15,6 +15,15 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   config.load_paths << "#{Rails.root}/app/presenters"
+  Dir["#{Rails.root}/vendor/plugins/*/app/presenters"].each do |directory|
+    config.load_paths << directory
+  end
+
+  config.after_initialize do
+    Dir["#{Rails.root}/vendor/plugins/*/config/locales/**/*.yml"].each do |locale_file|
+      I18n.load_path << locale_file
+    end
+  end
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"

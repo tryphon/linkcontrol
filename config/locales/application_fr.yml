@@ -1,12 +1,6 @@
 fr:
   activerecord:
     attributes:
-      network:
-        method: Configuration
-        static_address: Adresse IP
-        static_netmask: Masque réseau
-        static_gateway: Passerelle
-        static_dns1: Serveur de nom
       link_stream:
         target_host: Adresse de destination
         target_port: Port de destination
@@ -14,31 +8,7 @@ fr:
         udp_port: Port de réception
     models:
       link_stream: Configuration du flux
-      network: Configuration réseau     
       save_point: Sauver la configuration     
-    errors:
-      models:
-        network:
-          not_a_user_port: "n'est pas un port utilisable (entre 1025 et 65535)"
-          not_a_valid_ip_address: "n'est pas une adresse IP valide"
-          can_be_the_static_address: "ne peut être l'adresse IP de la box"
-          attributes:
-            static_netmask:
-              not_a_valid_netmask: "n'est pas un masque réseau valide"
-            static_gateway:
-              not_in_local_network: "n'est pas dans le réseau local"
-            linkstream_target_host:
-              not_valid_hostname: "'{{value}}' ne peut être trouvée"
-  networks:
-    method:
-      static: Configuration manuelle
-      dhcp: Configuration automatique (via DHCP)
-    show:
-      static_properties: Paramètres manuels
-    edit:
-      title: Modifier la Configuration réseau
-      submit: Modifier
-      cancel: revenir
   link_streams:
     target_properties: Destination du flux
     local_ports_properties: Ports locaux

@@ -1,6 +1,12 @@
 en:
   activerecord:
     attributes:
+      network:
+        method: Configuration
+        static_address: IP address
+        static_netmask: Network mask
+        static_gateway: Gateway
+        static_dns1: DNS server
       link_stream:
         target_host: Target host
         target_port: Target port
@@ -8,7 +14,18 @@ en:
         udp_port: Local UDP port
     models:
       link_stream: Link configuration
+      network: Network configuration
       save_point: Save configuration
+  networks:
+    method:
+      static: Manual configuration
+      dhcp: Automatic configuration (via DHCP)
+    show:
+      static_properties: Manual parameters
+    edit:
+      title: Edit the network configuration
+      submit: Edit
+      cancel: back
   link_streams:
     target_properties: Stream target
     local_ports_properties: Local ports
