@@ -1,3 +1,6 @@
 [submodule "vendor/plugins/user_interface"]
 	path = vendor/plugins/user_interface
 	url = ../user_interface
+[submodule "vendor/plugins/boxcontrol"]
+	path = vendor/plugins/boxcontrol
+	url = ../boxcontrol
