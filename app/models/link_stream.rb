@@ -1,4 +1,11 @@
+require 'ipaddr'
+
 class LinkStream < ActiveForm::Base
+  include PuppetConfigurable
+
+  def puppet_configuration_prefix
+    "linkstream"
+  end
 
   @@default_udp_port = 14100
   cattr_accessor :default_udp_port
@@ -39,15 +46,6 @@ class LinkStream < ActiveForm::Base
     false
   end
 
-  def save
-    return false unless valid?
-    PuppetConfiguration.load.update_attributes(self.attributes, "linkstream").save
-  end
-
-  def load
-    update_attributes PuppetConfiguration.load.attributes("linkstream")
-  end
-
   def self.load
     self.new.tap(&:load)
   end
@@ -56,7 +54,7 @@ class LinkStream < ActiveForm::Base
     return unless errors.on(target_host).blank?
 
     begin
-      if target_host =~ /[0-9.]+/
+      if target_host =~ /^[0-9\.]+$/
         IPAddr.new(target_host, Socket::AF_INET)
       else
         Socket.gethostbyname(target_host)

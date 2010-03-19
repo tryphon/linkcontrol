@@ -55,26 +55,6 @@ describe LinkStream do
       PuppetConfiguration.stub!(:load).and_return(@puppet_configuration)
     end
 
-    it "should return false if not valid" do
-      @link_stream.stub!(:valid?).and_return(false)
-      @link_stream.save.should be_false
-    end
-
-    it "should not modifiy puppet configuration if not valid" do
-      @link_stream.stub!(:valid?).and_return(false)
-      @link_stream.save
-      @puppet_configuration.should be_empty
-    end
-
-    it "should return true if the configuration is saved" do
-      @link_stream.save.should be_true
-    end
-
-    it "should return false if the configuration can't be saved" do
-      @puppet_configuration.stub!(:save).and_return(false)
-      @link_stream.save.should be_false
-    end
-
     def self.it_should_configure(attribute, options = {})
       configuration_key = (options[:as] or attribute.to_s)
       value = options[:value]
@@ -115,15 +95,6 @@ describe LinkStream do
     it_should_use :linkstream_target_port, :as => :target_port, :value => 14100
     it_should_use :linkstream_udp_port, :as => :udp_port, :value => 14100
     it_should_use :linkstream_http_port, :as => :http_port, :value => 8000
-  end
-
-  describe "class method load" do
-    
-    it "should create a new LinkStream instance and load it" do
-      LinkStream.should_receive(:new).and_return(@link_stream)
-      @link_stream.should_receive(:load)
-      LinkStream.load.should == @link_stream
-    end
 
   end
 
