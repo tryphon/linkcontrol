@@ -8,7 +8,6 @@ fr:
         udp_port: Port de réception
     models:
       link_stream: Configuration du flux
-      save_point: Sauver la configuration     
   link_streams:
     target_properties: Destination du flux
     local_ports_properties: Ports locaux
@@ -16,9 +15,6 @@ fr:
       title: Modifier la Configuration du flux
       submit: Modifier
       cancel: revenir
-  save_points:
-    new:
-      submit: Sauvegarder
   layouts:
     application:
       dashboard: Tableau de bord
