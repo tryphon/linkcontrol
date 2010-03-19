@@ -8,7 +8,6 @@ en:
         udp_port: Local UDP port
     models:
       link_stream: Link configuration
-      save_point: Save configuration
   link_streams:
     target_properties: Stream target
     local_ports_properties: Local ports
@@ -16,9 +15,6 @@ en:
       title: Edit the link configuration
       submit: Edit
       cancel: back
-  save_points:
-    new:
-      submit: Save
   layouts:
     application:
       dashboard: Dashboard
