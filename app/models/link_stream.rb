@@ -15,18 +15,8 @@ class LinkStream < ActiveForm::Base
 
   attr_accessor :target_host
 
-  def self.acts_as_ip_port(*names)
-    names.each do |name|
-      attr_accessor name
-      define_method("#{name}=") do |value|
-        value = value.blank? ? nil : value.to_i
-        instance_variable_set "@#{name}", value
-      end
-      validates_numericality_of name, :only_integer => true, :greater_than => 1024, :less_than => 65536, :message => :not_a_user_port
-    end
-  end
-
-  acts_as_ip_port :target_port, :udp_port, :http_port
+  include ActsAsIpPort
+  acts_as_ip_port :target_port, :udp_port, :http_port, :user_port => true
 
   def after_initialize
     self.target_host ||= "localhost"
@@ -44,10 +34,6 @@ class LinkStream < ActiveForm::Base
 
   def new_record?
     false
-  end
-
-  def self.load
-    self.new.tap(&:load)
   end
 
   def must_found_target_host
