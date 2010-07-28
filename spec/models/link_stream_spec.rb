@@ -29,6 +29,30 @@ describe LinkStream do
     @link_stream.should allow_values_for(:target_port, "")
   end
 
+  it "should support a undefined http port" do
+    @link_stream.http_port = nil
+    @link_stream.should be_valid
+    @link_stream.http_port.should be_nil
+  end
+
+  describe "http_enabled?" do
+
+    context "when http port is defined" do
+      before(:each) do
+        subject.http_port = 8000
+      end
+      it { should be_http_enabled }
+    end
+
+    context "when http port is not defined" do
+      before(:each) do
+        subject.http_port = nil
+      end
+      it { should_not be_http_enabled }
+    end
+
+  end
+
   def self.it_should_use_default_port_for(attribute, type)
     it "should use default port when #{attribute} is not specified" do
       @link_stream.send("#{attribute}=", nil)
@@ -39,7 +63,6 @@ describe LinkStream do
 
   it_should_use_default_port_for :target_port, :udp
   it_should_use_default_port_for :udp_port, :udp
-  it_should_use_default_port_for :http_port, :http
 
   it { pending "remarkable matcher doesn't support default value"; should validate_numericality_of(:target_port, :udp_port,:http_port, :only_integer => true, :greater_than => 1024, :less_than => 65536) }
 

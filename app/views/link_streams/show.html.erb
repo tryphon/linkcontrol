@@ -13,17 +13,24 @@
   <%= @link_stream.target_port %>
   </p>
 
-  <h3><%= t("link_streams.local_ports_properties") %></h3>
+  <h3><%= t("link_streams.udp_properties") %></h3>
 
   <p>
   <%= LinkStream.human_attribute_name("udp_port") %> :
   <%= @link_stream.udp_port %>
   </p>
 
+  <h3><%= t("link_streams.http_properties") %></h3>
+
+  <% if @link_stream.http_enabled? %>
   <p>
   <%= LinkStream.human_attribute_name("http_port") %> :
   <%= @link_stream.http_port %>
   </p>
+  <% else %>
+    <%= t(".http_is_disabled") %>
+  <% end %>
+
 </div>
 
 <div class="actions">

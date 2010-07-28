@@ -10,7 +10,10 @@ fr:
       link_stream: Configuration du flux
   link_streams:
     target_properties: Destination du flux
-    local_ports_properties: Ports locaux
+    udp_properties: Configuration UDP
+    http_properties: Configuration HTTP
+    show:
+      http_is_disabled: La réception et la mise à disposition en HTTP est désactivée
     edit:
       title: Modifier la Configuration du flux
       submit: Modifier

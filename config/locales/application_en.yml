@@ -10,11 +10,14 @@ en:
       link_stream: Link configuration
   link_streams:
     target_properties: Stream target
-    local_ports_properties: Local ports
+    http_properties: HTTP properties
+    udp_properties: UDP properties
     edit:
       title: Edit the link configuration
       submit: Edit
       cancel: back
+    show:
+      http_is_disabled: HTTP server is disabled
   layouts:
     application:
       dashboard: Dashboard

@@ -4,6 +4,7 @@ describe LinkStreamsController do
 
   before(:each) do
     @link_stream = LinkStream.new
+    @link_stream.stub :save => true
   end
 
   describe "GET 'show'" do
@@ -52,7 +53,8 @@ describe LinkStreamsController do
     end
 
     it "should create a LinkStream instance with form attributes" do
-      LinkStream.should_receive(:new).with(@params).and_return(@link_stream)
+      LinkStream.should_receive(:new).and_return(@link_stream)
+      @link_stream.should_receive(:update_attributes).with(@params)
       post 'update', :link_stream => @params
     end
 
