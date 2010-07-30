@@ -15,12 +15,14 @@
     <%= f.text_field :target_port %>
   </p>
 
-  <h3><%= t("link_streams.local_ports_properties") %></h3>
+  <h3><%= t("link_streams.udp_properties") %></h3>
 
   <p>
     <%= f.label :udp_port, LinkStream.human_attribute_name("udp_port") %><br/>
     <%= f.text_field :udp_port %>
   </p>
+
+  <h3><%= t("link_streams.http_properties") %></h3>
 
   <p>
     <%= f.label :http_port, LinkStream.human_attribute_name("http_port") %><br/>
