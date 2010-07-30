@@ -31,6 +31,33 @@
     <%= t(".http_is_disabled") %>
   <% end %>
 
+  <h3><%= t("link_streams.packetizer_properties") %></h3>
+
+  <% unless @link_stream.with_packetizer_properties? %>
+  <p><%= t(".no_packetizer_properties") %></p>
+  <% end %>
+
+  <% unless @link_stream.packetizer_interleaving.blank? %>
+  <p>
+  <%= LinkStream.human_attribute_name("packetizer_interleaving") %> :
+  <%= @link_stream.packetizer_interleaving %>
+  </p>
+  <% end %>
+
+  <% unless @link_stream.packetizer_repeat.blank? %>
+  <p>
+  <%= LinkStream.human_attribute_name("packetizer_repeat") %> :
+  <%= @link_stream.packetizer_repeat %>
+  </p>
+  <% end %>
+
+  <% unless @link_stream.packetizer_packet_size.blank? %>
+  <p>
+  <%= LinkStream.human_attribute_name("packetizer_packet_size") %> :
+  <%= @link_stream.packetizer_packet_size %>
+  </p>
+  <% end %>
+ 
 </div>
 
 <div class="actions">

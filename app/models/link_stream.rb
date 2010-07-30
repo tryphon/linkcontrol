@@ -21,6 +21,14 @@ class LinkStream < ActiveForm::Base
   acts_as_ip_port :target_port, :udp_port, :user_port => true
   acts_as_ip_port :http_port, :user_port => true, :allow_blank => true
 
+  attr_accessor :packetizer_interleaving, :packetizer_repeat, :packetizer_packet_size
+
+  with_options(:only_integer => true, :allow_blank => true) do |stream|
+    stream.validates_numericality_of :packetizer_interleaving, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 10
+    stream.validates_numericality_of :packetizer_repeat, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 11
+    stream.validates_numericality_of :packetizer_packet_size, :greater_than_or_equal_to => 100, :less_than_or_equal_to => 10.kilobytes
+  end
+
   def after_initialize
     self.target_host ||= "localhost"
     self.http_port ||= default_http_port
@@ -40,6 +48,10 @@ class LinkStream < ActiveForm::Base
 
   def http_enabled?
     not http_port.blank?
+  end
+
+  def with_packetizer_properties?
+    not [packetizer_interleaving, packetizer_repeat, packetizer_packet_size].all?(&:blank?)
   end
 
 end

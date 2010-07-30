@@ -68,7 +68,60 @@ describe LinkStream do
 
   it "should validate that target_host is a valid hostname" do
     @link_stream.should allow_values_for(:target_host, "localhost", "192.168.0.1")
+    Socket.should_receive(:gethostbyname).and_raise("No such host")
     @link_stream.should_not allow_values_for(:target_host, "dummy", "192.168.0")
+  end
+
+  describe "packetizer" do
+    # :interleaving => 2, :repeat => 2, :packet_size => 1200
+    
+    describe "interleaving" do
+      it "should accept values from 1 to 10" do
+        @link_stream.should allow_values_for(:packetizer_interleaving, 1..10)
+        @link_stream.should_not allow_values_for(:packetizer_interleaving, 0)
+      end
+
+      it { should_not validate_presence_of(:packetizer_interleaving) }
+    end
+
+    describe "repeat" do
+      it "should accept values from 1 to 10" do
+        @link_stream.should allow_values_for(:packetizer_repeat, 1..10)
+        @link_stream.should_not allow_values_for(:packetizer_repeat, 0)
+      end
+
+      it { should_not validate_presence_of(:packetizer_repeat) }
+    end
+
+    describe "packet_size" do
+      it "should accept values from 100 to 10k" do
+        @link_stream.should allow_values_for(:packetizer_packet_size, 100, 10.kilobytes)
+        @link_stream.should_not allow_values_for(:packetizer_packet_size, 1.megabyte)
+      end
+
+      it { should_not validate_presence_of(:packetizer_packet_size) }
+    end
+
+    describe "with_packetizer_properties?" do
+
+      context "when packetizer_interleaving, packetizer_repeat and packetizer_packet_size are blank" do
+        before(:each) do
+          [:packetizer_interleaving, :packetizer_repeat, :packetizer_packet_size].each do |attribute|
+            subject[attribute] = ""
+          end
+        end
+
+        it { should_not be_with_packetizer_properties }
+      end
+      
+      context "when one of packetizer_interleaving, packetizer_repeat and packetizer_packet_size isn't blank" do
+        before(:each) do
+          subject[:packetizer_interleaving] = 2  
+        end
+        
+        it { should be_with_packetizer_properties }
+      end
+    end
   end
 
   describe "save" do

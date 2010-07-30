@@ -29,6 +29,23 @@
     <%= f.text_field :http_port %>
   </p>
 
+  <h3><%= t("link_streams.packetizer_properties") %></h3>
+
+  <p>
+    <%= f.label :packetizer_interleaving, LinkStream.human_attribute_name("packetizer_interleaving") %><br/>
+    <%= f.text_field :packetizer_interleaving %>
+  </p>
+
+  <p>
+    <%= f.label :packetizer_repeat, LinkStream.human_attribute_name("packetizer_repeat") %><br/>
+    <%= f.text_field :packetizer_repeat %>
+  </p>
+
+  <p>
+    <%= f.label :packetizer_packet_size, LinkStream.human_attribute_name("packetizer_packet_size") %><br/>
+    <%= f.text_field :packetizer_packet_size %>
+  </p>
+
   <p>
     <%= f.submit t(".submit") %> 
     <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", link_stream_path %>
