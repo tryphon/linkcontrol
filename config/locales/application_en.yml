@@ -9,6 +9,7 @@ en:
         packetizer_interleaving: Interleaving
         packetizer_repeat: Repeat
         packetizer_packet_size: Packet size
+        unpacketizer_time_to_live: Time to live
     models:
       link_stream: Link configuration
   link_streams:
@@ -16,6 +17,7 @@ en:
     udp_properties: UDP properties
     http_properties: HTTP properties
     packetizer_properties: Sender properties
+    unpacketizer_properties: Receiver properties
     udp_properties: UDP properties
     edit:
       title: Edit the link configuration
@@ -24,6 +26,7 @@ en:
     show:
       http_is_disabled: HTTP server is disabled
       no_packetizer_properties: "Default configuration"
+      no_unpacketizer_properties: "Default configuration"
   layouts:
     application:
       dashboard: Dashboard

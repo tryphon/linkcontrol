@@ -22,11 +22,14 @@ class LinkStream < ActiveForm::Base
   acts_as_ip_port :http_port, :user_port => true, :allow_blank => true
 
   attr_accessor :packetizer_interleaving, :packetizer_repeat, :packetizer_packet_size
+  attr_accessor :unpacketizer_time_to_live
 
   with_options(:only_integer => true, :allow_blank => true) do |stream|
     stream.validates_numericality_of :packetizer_interleaving, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 10
     stream.validates_numericality_of :packetizer_repeat, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 11
     stream.validates_numericality_of :packetizer_packet_size, :greater_than_or_equal_to => 100, :less_than_or_equal_to => 10.kilobytes
+
+    stream.validates_numericality_of :unpacketizer_time_to_live, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 50
   end
 
   def after_initialize
@@ -52,6 +55,10 @@ class LinkStream < ActiveForm::Base
 
   def with_packetizer_properties?
     not [packetizer_interleaving, packetizer_repeat, packetizer_packet_size].all?(&:blank?)
+  end
+
+  def with_unpacketizer_properties?
+    not unpacketizer_time_to_live.blank?
   end
 
 end

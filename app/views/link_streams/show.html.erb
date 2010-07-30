@@ -57,6 +57,19 @@
   <%= @link_stream.packetizer_packet_size %>
   </p>
   <% end %>
+
+  <h3><%= t("link_streams.unpacketizer_properties") %></h3>
+
+  <% unless @link_stream.with_unpacketizer_properties? %>
+  <p><%= t(".no_unpacketizer_properties") %></p>
+  <% end %>
+
+  <% unless @link_stream.unpacketizer_time_to_live.blank? %>
+  <p>
+  <%= LinkStream.human_attribute_name("unpacketizer_time_to_live") %> :
+  <%= @link_stream.unpacketizer_time_to_live %>
+  </p>
+  <% end %>
  
 </div>
 

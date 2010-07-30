@@ -124,6 +124,19 @@ describe LinkStream do
     end
   end
 
+  describe "unpacketizer" do
+
+    describe "time_to_live" do
+      it "should accept values from 1 to 50" do
+        @link_stream.should allow_values_for(:unpacketizer_time_to_live, 1..50)
+        @link_stream.should_not allow_values_for(:unpacketizer_time_to_live, 0, 100)
+      end
+
+      it { should_not validate_presence_of(:unpacketizer_time_to_live) }
+    end
+
+  end
+
   describe "save" do
     
     before(:each) do

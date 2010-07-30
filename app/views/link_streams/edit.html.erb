@@ -46,6 +46,13 @@
     <%= f.text_field :packetizer_packet_size %>
   </p>
 
+  <h3><%= t("link_streams.unpacketizer_properties") %></h3>
+
+  <p>
+    <%= f.label :unpacketizer_time_to_live, LinkStream.human_attribute_name("unpacketizer_time_to_live") %><br/>
+    <%= f.text_field :unpacketizer_time_to_live %>
+  </p>
+
   <p>
     <%= f.submit t(".submit") %> 
     <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", link_stream_path %>
