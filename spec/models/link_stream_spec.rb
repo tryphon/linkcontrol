@@ -137,6 +137,34 @@ describe LinkStream do
 
   end
 
+  describe "alsa_capture" do
+    
+    it "should accept 'true' as boolean true" do
+      @link_stream.alsa_capture = "true"
+      @link_stream.should be_alsa_capture
+    end
+
+    it "should accept '1' as boolean true" do
+      @link_stream.alsa_capture = "1"
+      @link_stream.should be_alsa_capture
+    end
+
+  end
+
+  describe "alsa_playback" do
+    
+    it "should accept 'true' as boolean true" do
+      @link_stream.alsa_playback = "true"
+      @link_stream.should be_alsa_playback
+    end
+
+    it "should accept '1' as boolean true" do
+      @link_stream.alsa_playback = "1"
+      @link_stream.should be_alsa_playback
+    end
+
+  end
+
   describe "save" do
     
     before(:each) do

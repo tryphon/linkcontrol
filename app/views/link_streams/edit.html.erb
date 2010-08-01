@@ -29,6 +29,18 @@
     <%= f.text_field :http_port %>
   </p>
 
+  <h3><%= t("link_streams.alsa_properties") %></h3>
+
+  <p>
+    <%= f.check_box :alsa_capture %>
+    <%= f.label :alsa_capture, LinkStream.human_attribute_name("alsa_capture") %>
+  </p>
+
+  <p>
+    <%= f.check_box :alsa_playback %>
+    <%= f.label :alsa_playback, LinkStream.human_attribute_name("alsa_playback") %>
+  </p>
+
   <h3><%= t("link_streams.packetizer_properties") %></h3>
 
   <p>

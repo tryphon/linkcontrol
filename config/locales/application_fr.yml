@@ -6,6 +6,8 @@ fr:
         target_port: Port de destination
         http_port: Port HTTP local
         udp_port: Port de réception
+        alsa_capture: Capture
+        alsa_playback: Diffusion
         packetizer_interleaving: Entrelacement
         packetizer_repeat: Répétition
         packetizer_packet_size: Taille du paquet
@@ -16,12 +18,17 @@ fr:
     target_properties: Destination du flux
     udp_properties: Configuration UDP
     http_properties: Configuration HTTP
+    alsa_properties: Entrée/sortie Son
     packetizer_properties: "Configuration d'envoi"
     unpacketizer_properties: "Configuration de réception"
     show:
       http_is_disabled: La réception et la mise à disposition en HTTP est désactivée
       no_packetizer_properties: "Configuration par défaut"
       no_unpacketizer_properties: "Configuration par défaut"
+      alsa_capture_enabled: Activée
+      alsa_playback_enabled: Activé
+      alsa_capture_disabled: Désactivée
+      alsa_playback_disabled: Désactivée
     edit:
       title: Modifier la Configuration du flux
       submit: Modifier

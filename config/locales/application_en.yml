@@ -6,6 +6,8 @@ en:
         target_port: Target port
         http_port: Local HTTP port
         udp_port: Local UDP port
+        alsa_capture: Record
+        alsa_playback: Play
         packetizer_interleaving: Interleaving
         packetizer_repeat: Repeat
         packetizer_packet_size: Packet size
@@ -16,6 +18,7 @@ en:
     target_properties: Stream target
     udp_properties: UDP properties
     http_properties: HTTP properties
+    alsa_properties: Sound properties
     packetizer_properties: Sender properties
     unpacketizer_properties: Receiver properties
     udp_properties: UDP properties
@@ -27,6 +30,10 @@ en:
       http_is_disabled: HTTP server is disabled
       no_packetizer_properties: "Default configuration"
       no_unpacketizer_properties: "Default configuration"
+      alsa_capture_enabled: Enabled
+      alsa_playback_enabled: Enabled
+      alsa_capture_disabled: Disabled
+      alsa_playback_disabled: Disabled
   layouts:
     application:
       dashboard: Dashboard

@@ -31,6 +31,18 @@
     <%= t(".http_is_disabled") %>
   <% end %>
 
+  <h3><%= t("link_streams.alsa_properties") %></h3>
+
+  <p>
+    <%= LinkStream.human_attribute_name("alsa_capture") %> : 
+    <%= t(".alsa_capture_" + (@link_stream.alsa_capture? ? "enabled" : "disabled")) %>
+  </p>
+
+  <p>
+    <%= LinkStream.human_attribute_name("alsa_playback") %> :
+    <%= t(".alsa_playback_" + (@link_stream.alsa_playback? ? "enabled" : "disabled")) %>
+  </p>
+
   <h3><%= t("link_streams.packetizer_properties") %></h3>
 
   <% unless @link_stream.with_packetizer_properties? %>

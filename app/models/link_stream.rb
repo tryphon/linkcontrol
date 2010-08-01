@@ -32,6 +32,15 @@ class LinkStream < ActiveForm::Base
     stream.validates_numericality_of :unpacketizer_time_to_live, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 50
   end
 
+  [:capture, :playback].each do |mode|
+    attr_reader "alsa_#{mode}"
+    alias_method "alsa_#{mode}?", "alsa_#{mode}"
+
+    define_method("alsa_#{mode}=") do |enabled|
+      instance_variable_set "@alsa_#{mode}", ["true", "1", true].include?(enabled)
+    end
+  end
+
   def after_initialize
     self.target_host ||= "localhost"
     self.http_port ||= default_http_port
