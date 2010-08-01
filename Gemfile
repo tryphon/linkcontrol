@@ -2,7 +2,7 @@ source :gemcutter
 
 gem "rails", "2.3.8"
 
-group :develoment do
+group :development do
   gem "sqlite3-ruby"
 end
 
