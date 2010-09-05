@@ -1,3 +1,9 @@
+linkcontrol (0.2-1) UNRELEASED; urgency=low
+
+  * New upload release
+
+ -- Alban Peignier <alban@tryphon.eu>  Sun, 01 Aug 2010 11:19:44 +0200
+
 linkcontrol (0.1-1) UNRELEASED; urgency=low
 
   * Initial release.

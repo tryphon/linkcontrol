@@ -1,14 +1,16 @@
-build:
-	gem install --no-rdoc --no-ri -v=2.3.5 rails
-	cp config/database.yml.sample config/database.yml
-# TODO run gem with --no-rdoc --no-ri
-	rake gems:install
-	rake gems:unpack:dependencies
-	mkdir -p vendor/gems && cd vendor/gems && gem unpack --version 1.0.1 rack
-	rake rails:freeze:gems
+PATH := ${HOME}/.gem/ruby/1.8/bin:${HOME}/.bundle/ruby/1.8/bin:${PATH}
 
-# use rake installed by rubygem
-	~/.gem/ruby/1.8/bin/rake db:create db:migrate RAILS_ENV=production
+build:
+	gem install --no-rdoc --no-ri --user-install bundler
+	bundle install vendor --without=test --without=development
+
+	cp config/database.yml.sample config/database.yml
+
+	bundle exec rake rails:freeze:gems 
+	bundle exec rake db:create db:migrate RAILS_ENV=production
+
+	rm -rf vendor/bin vendor/cache vendor/doc vendor/specifications 
+	rm -rf vendor/gems/actionmailer-* vendor/gems/actionpack-* vendor/gems/activerecord-* vendor/gems/activeresource-* vendor/gems/activesupport-* vendor/gems/rails-*
 	rm -f config/database.yml
 
 install:

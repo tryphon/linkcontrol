@@ -6,12 +6,14 @@ begin
 
   namespace "package" do
     Package.new(:linkcontrol) do |t|
-      t.version = '0.1'
+      t.version = '0.2'
       t.debian_increment = 1
 
       t.source_provider = GitExportProvider.new do |source_directory|
-        Dir.chdir("vendor/plugins/user_interface") do 
-          sh "git archive --prefix=vendor/plugins/user_interface/ HEAD | tar -xf - -C #{source_directory}"      
+        %w{user_interface boxcontrol user_voice}.each do |submodule|
+          Dir.chdir("vendor/plugins/#{submodule}") do 
+            sh "git archive --prefix=vendor/plugins/#{submodule}/ HEAD | tar -xf - -C #{source_directory}"      
+          end
         end
       end
     end
