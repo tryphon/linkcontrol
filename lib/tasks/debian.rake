@@ -6,7 +6,7 @@ begin
 
   namespace "package" do
     Package.new(:linkcontrol) do |t|
-      t.version = '0.2'
+      t.version = '0.3'
       t.debian_increment = 1
 
       t.source_provider = GitExportProvider.new do |source_directory|
