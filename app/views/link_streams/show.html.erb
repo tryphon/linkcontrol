@@ -70,6 +70,13 @@
   </p>
   <% end %>
 
+  <% unless @link_stream.packetizer_token.blank? %>
+  <p>
+  <%= LinkStream.human_attribute_name("packetizer_token") %> :
+  <%= @link_stream.packetizer_token %>
+  </p>
+  <% end %>
+
   <h3><%= t("link_streams.unpacketizer_properties") %></h3>
 
   <% unless @link_stream.with_unpacketizer_properties? %>
@@ -80,6 +87,13 @@
   <p>
   <%= LinkStream.human_attribute_name("unpacketizer_time_to_live") %> :
   <%= @link_stream.unpacketizer_time_to_live %>
+  </p>
+  <% end %>
+ 
+  <% unless @link_stream.unpacketizer_token.blank? %>
+  <p>
+  <%= LinkStream.human_attribute_name("unpacketizer_token") %> :
+  <%= @link_stream.unpacketizer_token %>
   </p>
   <% end %>
  

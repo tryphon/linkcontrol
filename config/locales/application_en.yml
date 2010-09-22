@@ -11,7 +11,9 @@ en:
         packetizer_interleaving: Interleaving
         packetizer_repeat: Repeat
         packetizer_packet_size: Packet size
+        packetizer_token: Transmition token
         unpacketizer_time_to_live: Time to live
+        unpacketizer_token: Reception token
     models:
       link_stream: Link configuration
   link_streams:

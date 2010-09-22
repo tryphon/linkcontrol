@@ -11,7 +11,9 @@ fr:
         packetizer_interleaving: Entrelacement
         packetizer_repeat: Répétition
         packetizer_packet_size: Taille du paquet
+        packetizer_token: Clé secrète d'envoi
         unpacketizer_time_to_live: "Répit de réception"
+        unpacketizer_token: Clé secrète de réception
     models:
       link_stream: Configuration du flux
   link_streams:
