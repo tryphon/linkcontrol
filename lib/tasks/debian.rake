@@ -4,6 +4,20 @@ begin
   include Debian::Build
   require 'debian/build/config'
 
+  Platform.repositories << Proc.new do |platform| 
+    unless platform.distribution.ubuntu?
+      "deb http://www.debian-multimedia.org #{platform.distribution} main"
+    end
+  end
+
+  Platform.repositories << Proc.new do |platform| 
+    "deb http://debian.tryphon.eu lenny-backports main contrib" if platform.distribution.to_s == "stable"
+  end
+
+  Platform.repositories << Proc.new do |platform| 
+    "deb http://debian.tryphon.eu #{platform.distribution} main contrib"
+  end
+
   namespace "package" do
     Package.new(:linkcontrol) do |t|
       t.version = '0.3'
