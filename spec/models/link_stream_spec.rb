@@ -102,6 +102,15 @@ describe LinkStream do
       it { should_not validate_presence_of(:packetizer_packet_size) }
     end
 
+    describe "token" do
+      it "should allow an empty value" do
+        @link_stream.should allow_values_for(:packetizer_token, "")
+      end
+      it "should allow a non-empty valus" do
+        @link_stream.should allow_values_for(:packetizer_token, "foobar")
+      end
+    end
+
     describe "with_packetizer_properties?" do
 
       context "when packetizer_interleaving, packetizer_repeat and packetizer_packet_size are blank" do

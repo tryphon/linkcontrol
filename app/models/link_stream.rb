@@ -21,8 +21,8 @@ class LinkStream < ActiveForm::Base
   acts_as_ip_port :target_port, :udp_port, :user_port => true
   acts_as_ip_port :http_port, :user_port => true, :allow_blank => true
 
-  attr_accessor :packetizer_interleaving, :packetizer_repeat, :packetizer_packet_size
-  attr_accessor :unpacketizer_time_to_live
+  attr_accessor :packetizer_interleaving, :packetizer_repeat, :packetizer_packet_size, :packetizer_token
+  attr_accessor :unpacketizer_time_to_live, :unpacketizer_token
 
   with_options(:only_integer => true, :allow_blank => true) do |stream|
     stream.validates_numericality_of :packetizer_interleaving, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 10

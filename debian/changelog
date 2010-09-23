@@ -1,3 +1,9 @@
+linkcontrol (0.3-1) UNRELEASED; urgency=low
+
+  * New upload release implements tokens
+
+ -- Florent Peyraud <florent@tryphon.eu>  Wed, 22 Sep 2010 18:30:35 +0200
+
 linkcontrol (0.2-1) UNRELEASED; urgency=low
 
   * New upload release
