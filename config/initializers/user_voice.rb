@@ -6,5 +6,4 @@ UserVoice.config do |account|
   account.background_color = '#EA5D05' 
   account.text_color = 'white'
   account.hover_color = '#FF8F4A'
-  account.lang = 'fr'
 end
