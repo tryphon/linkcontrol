@@ -12,6 +12,7 @@ group :development do
   gem "sqlite3-ruby"
   gem "autotest"
   gem "less"
+  gem "rake-debian-build"
 end
 
 group :test do
