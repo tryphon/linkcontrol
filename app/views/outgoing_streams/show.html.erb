@@ -11,7 +11,7 @@
   <%= OutgoingStream.human_attribute_name("host") %> :
   <%= @outgoing_stream.host %>:<%= @outgoing_stream.port %>
   </p>
-  <% elseif @outgoing_stream.public_ip %>
+  <% elsif @outgoing_stream.public_ip %>
   <p>
     <%= t("outgoing_streams.available_at") %>
     <%= @outgoing_stream.public_ip %>:<%= Stream.default_port %>
