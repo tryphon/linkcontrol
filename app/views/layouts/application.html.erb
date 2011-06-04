@@ -8,7 +8,7 @@
     <link href="/stylesheets/tryphon.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
-  <body>
+  <body class="<%= controller.controller_name %> <%= controller.action_name %>">
     <ul id="access">
       <li><a href="#content">Aller au contenu</a></li>
       <li><a href="#sidebar">Aller au menu</a></li>
@@ -34,10 +34,20 @@
         <h2>LinkBox<sup>beta</sup></h2>
 
         <ul>
-          <li><%= link_to LinkStream.human_name, link_stream_path %></li>
+          <li><%= link_to OutgoingStream.human_name, outgoing_stream_path %></li>
+          <li><%= link_to IncomingStream.human_name, incoming_stream_path %></li>
+        </ul>
+
+        <ul>
+          <li><%= link_to Input.human_name, input_path %></li>
           <li><%= link_to Network.human_name, network_path %></li>
           <li><%= link_to SavePoint.human_name, new_save_point_path %></li>
+          <li><%= link_to Release.human_name, releases_path %></li>
         </ul>
+
+        <p class="languages">
+          <%= links_to_languages %>
+        </p>
 
         <h2><%= t(".information.title") %></h2>
         <p>

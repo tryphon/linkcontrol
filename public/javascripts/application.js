@@ -1,7 +1,7 @@
 Event.observe(window, "load", function() {
-  var toggle_network_static_inputs = function(enable) {
-    $('network_static_inputs').select("input[type=text]").each(function(input) {
-      if (enable) {
+  var toggle_stream_mode_inputs = function(mode, enabled) {
+    $('outgoing_stream_' + mode + '_inputs').select("input[type=text]").each(function(input) {
+      if (enabled) {
         input.enable();
       } else {
         input.disable();
@@ -9,12 +9,16 @@ Event.observe(window, "load", function() {
     });
   };
 
-  $$('input[type=radio][name="network[method]"]').each(function(radio) {
-    if (radio.value == "static") {
-      toggle_network_static_inputs(radio.checked);
-    }
+  var outgoing_stream_radios = new Array();
+  $$('input[type=radio][name="outgoing_stream[mode]"]').each(function(radio) {
+    toggle_stream_mode_inputs(radio.value, radio.checked);
+    outgoing_stream_radios.push(radio);
+
     Event.observe(radio, 'change', function() {
-      toggle_network_static_inputs(radio.getValue() == "static");
+      toggle_stream_mode_inputs(radio.value, radio.checked);
+      outgoing_stream_radios.without(radio).each(function(other_radio) {
+        toggle_stream_mode_inputs(other_radio.value, other_radio.checked);
+      });
     });
   });
 });

@@ -5,15 +5,6 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  before_filter :change_locale
-
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
-
-  private
-
-  def change_locale
-    I18n.locale = params[:lang] if params[:lang]
-  end
-
+  include UserInterface::LocaleManagement
+  include UserInterface::UserSessionManagement
 end
