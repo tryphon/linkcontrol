@@ -15,7 +15,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '>= 1.3.2'
+  gem 'rspec-rails', '~> 1.3.2'
   gem 'remarkable_rails'
 end
 
