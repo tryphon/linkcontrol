@@ -8,8 +8,13 @@
 
   <% if @incoming_stream.pull? %>
   <p>
-  <%= IncomingStream.human_attribute_name("host") %> :
-  <%= @incoming_stream.host %>:<%= @incoming_stream.port %>
+    <%= IncomingStream.human_attribute_name("host") %> :
+    <%= @incoming_stream.host %>:<%= @incoming_stream.port %>
+  </p>
+  <% elsif @incoming_stream.public_ip %>
+  <p>
+    <%= t("incoming_streams.sent_to") %>
+    <%= @incoming_stream.public_ip %>:<%= @incoming_stream.default_port %>
   </p>
   <% end %>
 

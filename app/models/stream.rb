@@ -1,4 +1,5 @@
 require 'ipaddr'
+require 'open-uri'
 
 class Stream < ActiveForm::Base
   include PuppetConfigurable
@@ -41,6 +42,12 @@ class Stream < ActiveForm::Base
 
   def new_record?
     false
+  end
+
+  def public_ip
+    @public_ip ||= open('http://www.freecast.org/reference.php',&:read)
+  rescue
+    nil
   end
 
 end

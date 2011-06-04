@@ -8,9 +8,10 @@
   <%= f.radio_button :mode, "pull" %>
   <div id="outgoing_stream_pull_inputs" class="mode_inputs">
     <%= f.label :mode, t("outgoing_streams.mode.pull") %>
-
-    <%= t("outgoing_streams.available_at") %>
-    <%= "78.12.34.56" %>:<%= Stream.default_port %>
+    <% if @outgoing_stream.public_ip %>
+       <%= t("outgoing_streams.available_at") %>
+       <%= @outgoing_stream.public_ip %>:<%= Stream.default_port %>
+    <% end %>
   </div>
 </p>
 </p>

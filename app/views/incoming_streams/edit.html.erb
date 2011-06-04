@@ -6,19 +6,21 @@
 <h3><%= IncomingStream.human_attribute_name("mode") %></h3>
 <p>
   <%= f.radio_button :mode, "push" %>
-  <div id="incoming_stream_pull_inputs" class="mode_inputs">
-    <%= f.label :mode, t("incoming_streams.mode.pull") %>
+  <div id="incoming_stream_push_inputs" class="mode_inputs">
+    <%= f.label :mode, t("incoming_streams.mode.push") %>
 
-    <%= t("incoming_streams.sent_to") %>
-    <%= "78.12.34.56" %>:<%= Stream.default_port %>
+    <% if @incoming_stream.public_ip %>
+      <%= t("incoming_streams.sent_to") %>
+      <%= @incoming_stream.public_ip %>:<%= Stream.default_port %>
+    <% end %>
   </div>
 </p>
 </p>
 
 <p>
   <%= f.radio_button :mode, "pull" %>
-  <div id="incoming_stream_push_inputs" class="mode_inputs">
-    <%= f.label :mode, t("incoming_streams.mode.push") %>
+  <div id="incoming_stream_pull_inputs" class="mode_inputs">
+    <%= f.label :mode, t("incoming_streams.mode.pull") %>
 
     <%= f.text_field :host %> <%= f.text_field :port, :size => 4 %>
   </div>
