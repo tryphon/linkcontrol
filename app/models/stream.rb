@@ -17,6 +17,7 @@ class Stream < ActiveForm::Base
   attr_accessor :password
   validates_format_of :password, :with => /^[A-Za-z0-9]*$/
   validates_length_of :password, :minimum => 6, :allow_blank => true
+  validates_presence_of :password, :if => :push?
 
   attr_accessor :mode
   validates_inclusion_of :mode, :in => %{push pull}

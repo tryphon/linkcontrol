@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe IncomingStream do
 
+  subject { IncomingStream.new :mode => "pull" }
+
   its(:puppet_configuration_prefix) { should == "link_incoming" }
 
   describe "save" do

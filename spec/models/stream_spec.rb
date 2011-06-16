@@ -31,8 +31,14 @@ describe Stream do
       subject.should_not allow_values_for(:password, "a", "aaa", "aaaaa")
     end
 
-    it "should be optionnal" do
+    it "should be optionnal in pull mode" do
+      subject.mode = "pull"
       subject.should allow_values_for(:password, nil, "")
+    end
+
+    it "should be mandatory in push mode" do
+      subject.mode = "push"
+      subject.should validate_presence_of(:password)
     end
 
   end
