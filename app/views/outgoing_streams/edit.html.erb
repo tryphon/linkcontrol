@@ -8,10 +8,6 @@
   <%= f.radio_button :mode, "pull" %>
   <div id="outgoing_stream_pull_inputs" class="mode_inputs">
     <%= f.label :mode, t("outgoing_streams.mode.pull") %>
-    <% if @outgoing_stream.public_ip %>
-       <%= t("outgoing_streams.available_at") %>
-       <%= @outgoing_stream.public_ip %>:<%= Stream.default_port %>
-    <% end %>
   </div>
 </p>
 </p>
@@ -40,3 +36,7 @@
   <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", outgoing_stream_path %>
 </p>
 <% end %>
+
+<div class="inline_help">
+  <%= render :partial => "inline_help", :locals => { :mode => :all } %>
+</div>

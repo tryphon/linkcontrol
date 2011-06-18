@@ -8,11 +8,6 @@
   <%= f.radio_button :mode, "push" %>
   <div id="incoming_stream_push_inputs" class="mode_inputs">
     <%= f.label :mode, t("incoming_streams.mode.push") %>
-
-    <% if @incoming_stream.public_ip %>
-      <%= t("incoming_streams.sent_to") %>
-      <%= @incoming_stream.public_ip %>:<%= Stream.default_port %>
-    <% end %>
   </div>
 </p>
 </p>
@@ -36,3 +31,7 @@
   <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", incoming_stream_path %>
 </p>
 <% end %>
+
+<div class="inline_help">
+  <%= render :partial => "inline_help", :locals => { :mode => :all } %>
+</div>

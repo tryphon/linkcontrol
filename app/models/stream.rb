@@ -1,5 +1,6 @@
 require 'ipaddr'
 require 'open-uri'
+require 'facter'
 
 class Stream < ActiveForm::Base
   include PuppetConfigurable
@@ -49,6 +50,10 @@ class Stream < ActiveForm::Base
     @public_ip ||= open('http://www.freecast.org/reference.php',&:read)
   rescue
     nil
+  end
+
+  def local_ip
+    @local_ip ||= "172.20.2.46" # Facter.value(:ipaddress_eth0)
   end
 
 end

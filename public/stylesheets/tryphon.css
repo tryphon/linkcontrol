@@ -215,6 +215,20 @@ em { font-style: italic; }
   margin-top: 20px;
 }
 #content .inline_help p { margin: 6px 0; }
+#content .inline_help li {
+  margin: 0;
+  padding-top: 3px;
+}
+#content .inline_help ol { list-style-type: decimal; }
+#content .inline_help ol li {
+  list-style: decimal;
+  margin-left: 20px;
+}
+#content .inline_help ul { list-style-type: circle; }
+#content .inline_help ul li {
+  list-style: circle;
+  margin-left: 20px;
+}
 #sidebar {
   float: left;
   width: 200px;

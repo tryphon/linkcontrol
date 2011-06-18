@@ -11,11 +11,6 @@
     <%= IncomingStream.human_attribute_name("host") %> :
     <%= @incoming_stream.host %>:<%= @incoming_stream.port %>
   </p>
-  <% elsif @incoming_stream.public_ip %>
-  <p>
-    <%= t("incoming_streams.sent_to") %>
-    <%= @incoming_stream.public_ip %>:<%= @incoming_stream.default_port %>
-  </p>
   <% end %>
 
   <p>
@@ -26,4 +21,8 @@
   <div class="actions">
     <%= link_to t("incoming_streams.actions.edit"), edit_incoming_stream_path, :class => "edit" %>
   </div>
+</div>
+
+<div class="inline_help">
+  <%= render :partial => "inline_help" %>
 </div>

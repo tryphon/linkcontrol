@@ -11,11 +11,6 @@
   <%= OutgoingStream.human_attribute_name("host") %> :
   <%= @outgoing_stream.host %>:<%= @outgoing_stream.port %>
   </p>
-  <% elsif @outgoing_stream.public_ip %>
-  <p>
-    <%= t("outgoing_streams.available_at") %>
-    <%= @outgoing_stream.public_ip %>:<%= Stream.default_port %>
-  </p>
   <% end %>
 
   <p>
@@ -31,4 +26,8 @@
   <div class="actions">
     <%= link_to t("outgoing_streams.actions.edit"), edit_outgoing_stream_path, :class => "edit" %>
   </div>
+</div>
+
+<div class="inline_help">
+  <%= render :partial => "inline_help" %>
 </div>
