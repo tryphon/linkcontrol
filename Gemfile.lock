@@ -16,10 +16,17 @@ GEM
     activesupport (2.3.8)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
+    capistrano (2.8.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     daemons (1.1.0)
     delayed_job (2.0.4)
       daemons
     has_scope (0.5.0)
+    highline (1.6.1)
     hoe (2.6.2)
       rake (>= 0.8.7)
       rubyforge (>= 2.0.4)
@@ -32,6 +39,13 @@ GEM
       mutter (>= 0.4.2)
       treetop (>= 1.4.2)
     mutter (0.5.3)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.1.4)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     polyglot (0.3.1)
     rack (1.1.2)
     rails (2.3.8)
@@ -70,6 +84,7 @@ PLATFORMS
 DEPENDENCIES
   SyslogLogger
   autotest
+  capistrano
   delayed_job
   i18n (< 0.5.0)
   inherited_resources (~> 1.0.6)

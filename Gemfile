@@ -13,6 +13,7 @@ group :development do
   gem "autotest"
   gem "less"
   gem "rake-debian-build"
+  gem "capistrano"
 end
 
 group :test do
