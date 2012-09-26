@@ -1,6 +1,6 @@
 set :application, "linkcontrol"
 
-set :repository,  "git://www.tryphon.priv/linkcontrol"
+set :repository,  "git://projects.tryphon.priv/linkcontrol"
 set :scm, :git
 set :git_enable_submodules, true
 set :deploy_via, :copy
