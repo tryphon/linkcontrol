@@ -2,7 +2,7 @@ require 'ipaddr'
 require 'open-uri'
 require 'facter'
 
-class Stream < ActiveForm::Base
+class LinkStream < ActiveForm::Base
   include PuppetConfigurable
 
   @@default_port = 8000

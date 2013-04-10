@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem "rails", "2.3.8"
 
@@ -8,13 +8,17 @@ gem "delayed_job"
 
 gem "i18n", "< 0.5.0"
 
+gem "tryphon-box", :git => "git://projects.tryphon.priv/box"
+gem "pige", :git => "git://projects.tryphon.priv/pige"
+
+gem "metalive", "0.0.1"
+
 group :development do
   gem "sqlite3-ruby"
-  gem "autotest"
   gem "less"
   gem "rake-debian-build"
   gem "capistrano"
-  gem "rake"
+  gem "rake", "~> 0.8.7"
 end
 
 group :test do

@@ -51,4 +51,10 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+
+  config.before(:each) do
+    Box::Release.latest_url = "public/updates/latest.yml"
+    Box::Release.current_url = "public/current.yml"
+    Box::Release.install_command = "/bin/true"
+  end
 end

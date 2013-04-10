@@ -1,4 +1,4 @@
-class OutgoingStream < Stream
+class OutgoingStream < LinkStream
 
   def puppet_configuration_prefix
     "link_outgoing"

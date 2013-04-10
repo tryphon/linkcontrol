@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Stream do
+describe LinkStream do
 
   describe "by default" do
     it "should use 8000 as port" do
