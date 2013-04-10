@@ -2,24 +2,21 @@ PATH := ${HOME}/.gem/ruby/1.8/bin:${HOME}/.bundle/ruby/1.8/bin:${PATH}
 
 build:
 	gem install --no-rdoc --no-ri --user-install bundler
-	bundle install --deployment --without=test --without=development
-	ln -s bundle/ruby/1.8/gems vendor/gems
+	MAKEFLAGS="" bundle install --deployment --without=test development cucumber
 
 	cp config/database.yml.sample config/database.yml
 
-	bundle exec rake rails:freeze:gems
 	bundle exec rake db:create db:migrate RAILS_ENV=production
 
-	rm -rf vendor/bundle/ruby/1.8/bin vendor/bundle/ruby/1.8/cache vendor/bundle/ruby/1.8/doc vendor/bundle/ruby/1.8/specifications
-	rm -rf vendor/gems/actionmailer-* vendor/gems/actionpack-* vendor/gems/activerecord-* vendor/gems/activeresource-* vendor/gems/activesupport-* vendor/gems/rails-*
+	rm -rf vendor/bundle/ruby/1.8/bin vendor/bundle/ruby/1.8/cache vendor/bundle/ruby/1.8/doc
 	rm -f config/database.yml
 
 install:
-	cp -a app public vendor config lib db ${DESTDIR}usr/share/linkcontrol
+	cp -a app public vendor config lib db script ${DESTDIR}usr/share/linkcontrol
+	cp -a Gemfile Gemfile.lock .bundle ${DESTDIR}usr/share/linkcontrol
 	rm -f ${DESTDIR}usr/share/linkcontrol/config/environments/production.rb
 	cp debian/database.yml debian/production.rb debian/apache2.conf ${DESTDIR}etc/linkcontrol/
-	cp debian/syslog_logger.rb ${DESTDIR}usr/share/linkcontrol/lib
 
 clean:
-	rm -rf vendor/rails vendor/bundle vendor/gems db/production.sqlite3
+	rm -rf vendor/bundle db/production.sqlite3
 
