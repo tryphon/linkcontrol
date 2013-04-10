@@ -1,4 +1,4 @@
-source :gemcutter
+source 'https://rubygems.org'
 
 gem "rails", "2.3.8"
 
@@ -14,6 +14,7 @@ group :development do
   gem "less"
   gem "rake-debian-build"
   gem "capistrano"
+  gem "rake"
 end
 
 group :test do

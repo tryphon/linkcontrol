@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     SyslogLogger (1.4.0)
       hoe (>= 1.2.0)
@@ -90,6 +90,7 @@ DEPENDENCIES
   inherited_resources (~> 1.0.6)
   less
   rails (= 2.3.8)
+  rake
   rake-debian-build
   remarkable_rails
   responders (~> 0.4.7)
