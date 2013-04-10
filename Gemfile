@@ -12,6 +12,7 @@ gem "tryphon-box", :git => "git://projects.tryphon.priv/box"
 gem "pige", :git => "git://projects.tryphon.priv/pige"
 
 gem "metalive", "0.0.1"
+gem "taglib-ruby", "0.4.0"
 
 group :development do
   gem "sqlite3-ruby"
