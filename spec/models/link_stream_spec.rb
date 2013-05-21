@@ -23,7 +23,7 @@ describe LinkStream do
   end
 
   describe "#password" do
-    
+
     it { should allow_values_for(:password, "Yoofu8Oh", "meeG5eem") }
     it { should_not allow_values_for(:password, "Yoofu 8Oh", "meeG/5eem") }
 
@@ -50,7 +50,7 @@ describe LinkStream do
   it { should validate_inclusion_of :mode, :in => %{push pull} }
 
   describe "#push?" do
-    
+
     it "should be true when mode is push" do
       subject.mode = "push"
       subject.should be_push
@@ -59,6 +59,15 @@ describe LinkStream do
     it "should be false when mode is pull" do
       subject.mode = "pull"
       subject.should_not be_push
+    end
+
+  end
+
+  describe "#local_ip" do
+
+    it "should return address associated to the eth0 Network interface" do
+      Network.should_receive(:find).with("eth0").and_return(mock :address => "172.20.2.10")
+      subject.local_ip.should == "172.20.2.10"
     end
 
   end

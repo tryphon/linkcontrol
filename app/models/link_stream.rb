@@ -53,7 +53,7 @@ class LinkStream < ActiveForm::Base
   end
 
   def local_ip
-    @local_ip ||= "172.20.2.46" # Facter.value(:ipaddress_eth0)
+    @local_ip ||= Network.find("eth0").address
   end
 
 end
