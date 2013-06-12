@@ -1,12 +1,13 @@
 GIT
   remote: git://projects.tryphon.priv/box
-  revision: 020ee5677d2fdacef44e69efbe6f068cce1610d9
+  revision: 7a4bd4b0bdcbca74def435dad9e22874af72a4c1
   specs:
-    tryphon-box (0.0.8)
+    tryphon-box (0.0.10)
       activesupport
       facter
       httparty
       steto
+      treetop
       trollop
 
 GIT
@@ -44,7 +45,7 @@ GEM
     delayed_job (2.0.7)
       activesupport (~> 2.0)
       daemons (= 1.0.10)
-    facter (1.6.18)
+    facter (1.7.1)
     has_scope (0.5.1)
     highline (1.6.16)
     httparty (0.6.1)
@@ -53,7 +54,7 @@ GEM
     inherited_resources (1.0.6)
       has_scope (~> 0.5.0)
       responders (~> 0.4.6)
-    json (1.7.7)
+    json (1.8.0)
     less (2.3.1)
       commonjs (~> 0.2.6)
     metalive (0.0.1)
@@ -65,7 +66,8 @@ GEM
     net-ssh (2.6.6)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    parallel (0.6.4)
+    parallel (0.6.5)
+    polyglot (0.3.3)
     rack (1.1.6)
     rails (2.3.8)
       actionmailer (= 2.3.8)
@@ -99,6 +101,9 @@ GEM
       json
       parallel
     taglib-ruby (0.4.0)
+    treetop (1.4.14)
+      polyglot
+      polyglot (>= 0.3.1)
     trollop (2.0)
 
 PLATFORMS
