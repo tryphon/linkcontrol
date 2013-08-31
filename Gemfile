@@ -27,6 +27,15 @@ group :test do
   gem "taglib-ruby", "0.4.0"
 end
 
-group :production do 
+group :production do
   gem "SyslogLogger"
+end
+
+group :development, :test do
+  gem "guard"
+  gem 'guard-rspec'
+  group :linux do
+    gem 'rb-inotify'
+    gem 'libnotify'
+  end
 end
