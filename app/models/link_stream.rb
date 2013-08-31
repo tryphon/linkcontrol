@@ -46,10 +46,23 @@ class LinkStream < ActiveForm::Base
     false
   end
 
+  UNKNOWN_PUBLIC_IP = "unknown"
+
+  def raw_public_ip
+    @raw_public_ip ||= Rails.cache.fetch("LinkStream#public_ip", :expires_in => 5.minutes) do
+      begin
+        Timeout::timeout(5) do
+          open('http://www.freecast.org/reference.php',&:read)
+        end
+      rescue Exception => e
+        Rails.logger.error "Failed to retrieve public ip : #{e}"
+        UNKNOWN_PUBLIC_IP
+      end
+    end
+  end
+
   def public_ip
-    @public_ip ||= open('http://www.freecast.org/reference.php',&:read)
-  rescue
-    nil
+    raw_public_ip unless raw_public_ip == UNKNOWN_PUBLIC_IP
   end
 
   def local_ip

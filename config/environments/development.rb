@@ -16,6 +16,8 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
+config.cache_store = ActiveSupport::Cache::FileStore.new(Rails.root + "tmp/cache")
+
 config.to_prepare do
   Input.current_class = TunerInput
 

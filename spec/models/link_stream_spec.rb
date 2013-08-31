@@ -72,4 +72,18 @@ describe LinkStream do
 
   end
 
+  describe "#public_ip" do
+
+    it "should return the public ip returned by http://www.freecast.org/reference.php" do
+      subject.should_receive(:open).with("http://www.freecast.org/reference.php").and_return("1.2.3.4")
+      subject.public_ip.should == "1.2.3.4"
+    end
+
+    it "should return nil on timeout" do
+      subject.should_receive(:open).with("http://www.freecast.org/reference.php").and_raise(Timeout::Error)
+      subject.public_ip.should be_nil
+    end
+
+  end
+
 end

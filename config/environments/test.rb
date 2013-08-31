@@ -29,3 +29,7 @@ config.action_mailer.delivery_method = :test
 
 config.gem 'rspec-rails', :version => '>= 1.3.2', :lib => false
 config.gem 'remarkable_rails'
+
+# Disable cache for test
+require 'null_store'
+config.cache_store = ActiveSupport::Cache::NullStore.new
