@@ -1,8 +1,8 @@
 GIT
   remote: git://projects.tryphon.priv/box
-  revision: 86aab9db0ed015e901cb8a1cbbd5a38b7e98655d
+  revision: 7b3841311cdaab33ea2542b1c5e32cf255165242
   specs:
-    tryphon-box (0.0.12)
+    tryphon-box (0.0.14)
       activesupport (< 4)
       facter
       httparty
@@ -46,7 +46,7 @@ GEM
     delayed_job (2.0.7)
       activesupport (~> 2.0)
       daemons (= 1.0.10)
-    facter (1.7.2)
+    facter (1.7.3)
     ffi (1.9.0)
     formatador (0.2.4)
     guard (1.8.2)
@@ -85,7 +85,7 @@ GEM
     net-ssh (2.6.6)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    parallel (0.8.0)
+    parallel (0.8.4)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
