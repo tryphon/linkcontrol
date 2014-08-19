@@ -1,0 +1,26 @@
+<p>
+The <%= link_to "incoming stream", incoming_stream_path %> comes from another LinkBox. The audio card of the local LinkBox delivers the received sound.
+</p>
+
+<p>Use <strong>the same password</strong> in the Output Stream setup of the other LinkBox.</p>
+
+<% if (mode ||= nil) == :all or @incoming_stream.push? %>
+<p>
+<strong>Network requirements :</strong>
+in push mode, to receive the stream sent by the other LinkBox, you need :
+</p>
+
+<ol>
+<li>make the port 8000 of this LinkBox accessible <% if @incoming_stream.local_ip %>(<%= @incoming_stream.local_ip %>:8000)<% end %> from Internet</li>
+<li>use in the Outgoing Stream setup of the other LinkBox, the public address of this LinkBox
+<% if @incoming_stream.public_ip %>(which seems to be <%= @incoming_stream.public_ip %>)<% end %>
+</li>
+</ol>
+
+<p>
+Read the <%= link_to "LinkBox modes documentation", "http://wiki.tryphon.eu/linkbox/modes" %>. If needed, here is the information detected automatically : 
+<ul>
+<li>Local address : <%= @incoming_stream.local_ip or "none" %></li>
+<li>Public address : <%= @incoming_stream.public_ip or "none" %></li>
+</p>
+<% end %>

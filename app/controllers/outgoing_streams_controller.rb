@@ -11,10 +11,7 @@ class OutgoingStreamsController < ApplicationController
 
   def update
     @outgoing_stream = OutgoingStream.new
-    # new and update_attributes are separated to
-    # prevent problems with default attributes
-    @outgoing_stream.update_attributes params[:outgoing_stream]
-    if @outgoing_stream.save
+    if @outgoing_stream.update_attributes params[:outgoing_stream]
       flash[:success] = t("outgoing_streams.flash.update.success")
       redirect_to outgoing_stream_path
     else

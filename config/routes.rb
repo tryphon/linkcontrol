@@ -1,6 +1,6 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resource :outgoing_stream
-  map.resource :incoming_stream
-  
-  map.root :controller => "welcome"
+Linkcontrol::Application.routes.draw do
+  resource :outgoing_stream
+  resource :incoming_stream
+
+  root :to => 'welcome#index'
 end

@@ -1,7 +1,7 @@
 en:
-  activerecord:
+  activemodel:
     attributes:
-      stream:
+      link_stream:
         mode: Transport mode
       outgoing_stream:
         host: Destination
@@ -10,9 +10,15 @@ en:
     models:
       outgoing_stream: Outgoing stream
       incoming_stream: Incoming stream
+    errors:
+      models:
+        incoming_stream:
+          attributes:
+            host:
+              not_valid_hostname: "Specified hostname can't be found"
   outgoing_streams:
     available_at: "Available on"
-    edit: 
+    edit:
       title: Modify outgoing stream
       submit: Save
       cancel: back
@@ -21,7 +27,7 @@ en:
       no_password: none
     mode:
       pull: Available locally (pull mode)
-      push: Sent to (push mode) 
+      push: Sent to (push mode)
     actions:
       edit: Edit
     flash:
@@ -30,7 +36,7 @@ en:
         failure: "Setup can't be modified"
   incoming_streams:
     sent_to: "To be sent to"
-    edit: 
+    edit:
       title: Modify incoming stream
       submit: Save
       cancel: back
@@ -38,7 +44,7 @@ en:
       title: Incoming stream
       no_password: none
     mode:
-      pull: Retrieve from (pull mode) 
+      pull: Retrieve from (pull mode)
       push: Receive locally (push mode)
     actions:
       edit: Edit
@@ -47,9 +53,9 @@ en:
         success: "Setup has been modified successfully"
         failure: "Setup can't be modified"
 fr:
-  activerecord:
+  activemodel:
     attributes:
-      stream:
+      link_stream:
         mode: "Mode d'acheminement"
         password: Mot de passe
         quality: Qualité
@@ -60,9 +66,15 @@ fr:
     models:
       outgoing_stream: Flux sortant
       incoming_stream: Flux entrant
+    errors:
+      models:
+        incoming_stream:
+          attributes:
+            host:
+              not_valid_hostname: "Le nom indiqué ne peut être trouvé"
   outgoing_streams:
     available_at: "Disponible à l'adresse"
-    edit: 
+    edit:
       title: Modifier le flux sortant
       submit: Modifier
       cancel: revenir
@@ -80,7 +92,7 @@ fr:
         failure: "La configuration n'a pu été modifiée"
   incoming_streams:
     sent_to: "Envoyé vers"
-    edit: 
+    edit:
       title: Modifier le flux entrant
       submit: Modifier
       cancel: revenir

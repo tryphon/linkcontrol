@@ -8,10 +8,10 @@ describe IncomingStream do
 
   describe "save" do
 
-    let(:puppet_configuration) { PuppetConfiguration.new }
-    
+    let(:puppet_configuration) { Box::PuppetConfiguration.new }
+
     before(:each) do
-      PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
+      Box::PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
     end
 
     def self.it_should_configure(attribute, options = {})
@@ -33,10 +33,10 @@ describe IncomingStream do
 
   describe "load" do
 
-    let(:puppet_configuration) { PuppetConfiguration.new }
-    
+    let(:puppet_configuration) { Box::PuppetConfiguration.new }
+
     before(:each) do
-      PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
+      Box::PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
     end
 
     def self.it_should_use(configuration_key, options = {})

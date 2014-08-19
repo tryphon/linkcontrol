@@ -1,0 +1,3 @@
+var/log/linkcontrol usr/share/linkcontrol/log
+etc/linkcontrol/database.yml usr/share/linkcontrol/config/database.yml
+etc/linkcontrol/production.rb usr/share/linkcontrol/config/environments/production.rb

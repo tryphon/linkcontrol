@@ -1,0 +1,16 @@
+fieldset { border: 1px solid #7dacd1; padding: 0 10px 5px 10px; margin-left: -5px; margin-bottom: 10px; }
+fieldset legend { margin-left: -8px; padding: 0 2px 0 2px; }
+
+form.edit_outgoing_stream input[type=radio], form.edit_incoming_stream input[type=radio] {
+    float: left;
+    margin: 2px 5px 0 0;
+} 
+
+form.edit_outgoing_stream label[for=outgoing_stream_mode], form.edit_incoming_stream label[for=incoming_stream_mode] {
+    margin-bottom: 5px;
+    display: block;
+}
+
+form.edit_outgoing_stream .mode_inputs, form.edit_incoming_stream .mode_inputs {
+    margin-left: 20px;
+}

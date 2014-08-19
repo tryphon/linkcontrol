@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    attributes:
+      support:
+        boot_check: Check at boot time
+        poll_check: Check at runtime
+    models:
+      save_point: Save configuration
+    errors:
+      messages:
+        not_a_user_port: "is not a usable port (between 1025 and 65535)"
+        not_a_valid_port: "is not a valid port"
+        not_valid_hostname: "is not a valid ip address or a known host"
+  save_points:
+    new:
+      submit: Save

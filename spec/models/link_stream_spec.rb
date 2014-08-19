@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe LinkStream do
@@ -17,23 +18,24 @@ describe LinkStream do
   it { pending "remarkable matcher doesn't support default value"; should validate_numericality_of(:port, :only_integer => true, :greater_than => 1024, :less_than => 65536) }
 
   it "should validate that host is a valid hostname" do
-    subject.should allow_values_for(:host, "localhost", "192.168.0.1")
-    Socket.should_receive(:gethostbyname).and_raise("No such host")
-    subject.should_not allow_values_for(:host, "dummy", "192.168.0")
+    subject.should allow_value("localhost", "192.168.0.1").for(:host)
+
+    Socket.stub(:gethostbyname).and_raise("No such host")
+    subject.should_not allow_value("dummy", "192.168.0").for(:host)
   end
 
   describe "#password" do
 
-    it { should allow_values_for(:password, "Yoofu8Oh", "meeG5eem") }
-    it { should_not allow_values_for(:password, "Yoofu 8Oh", "meeG/5eem") }
+    it { should allow_value("Yoofu8Oh", "meeG5eem").for(:password) }
+    it { should_not allow_value("Yoofu 8Oh", "meeG/5eem").for(:password) }
 
     it "should not accept less than 6 character" do
-      subject.should_not allow_values_for(:password, "a", "aaa", "aaaaa")
+      subject.should_not allow_value("a", "aaa", "aaaaa").for(:password)
     end
 
     it "should be optionnal in pull mode" do
       subject.mode = "pull"
-      subject.should allow_values_for(:password, nil, "")
+      subject.should allow_value(nil, "").for(:password)
     end
 
     it "should be mandatory in push mode" do
@@ -44,10 +46,10 @@ describe LinkStream do
   end
 
   it "should not be a new record" do
-    subject.should_not be_new_record
+    subject.should be_persisted
   end
 
-  it { should validate_inclusion_of :mode, :in => %{push pull} }
+  it { should ensure_inclusion_of(:mode).in_array(%w{push pull}) }
 
   describe "#push?" do
 

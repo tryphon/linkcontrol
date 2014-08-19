@@ -1,0 +1,98 @@
+en:
+  activerecord:
+    attributes:
+      stream:
+        mode: Transport mode
+      outgoing_stream:
+        host: Destination
+      incoming_stream:
+        host: Source
+    models:
+      outgoing_stream: Outgoing stream
+      incoming_stream: Incoming stream
+  outgoing_streams:
+    available_at: "Available on"
+    edit: 
+      title: Modify outgoing stream
+      submit: Save
+      cancel: back
+    show:
+      title: Outgoing stream
+      no_password: none
+    mode:
+      pull: Available locally (pull mode)
+      push: Sent to (push mode) 
+    actions:
+      edit: Edit
+    flash:
+      update:
+        success: "Setup has been modified successfully"
+        failure: "Setup can't be modified"
+  incoming_streams:
+    sent_to: "To be sent to"
+    edit: 
+      title: Modify incoming stream
+      submit: Save
+      cancel: back
+    show:
+      title: Incoming stream
+      no_password: none
+    mode:
+      pull: Retrieve from (pull mode) 
+      push: Receive locally (push mode)
+    actions:
+      edit: Edit
+    flash:
+      update:
+        success: "Setup has been modified successfully"
+        failure: "Setup can't be modified"
+fr:
+  activerecord:
+    attributes:
+      stream:
+        mode: "Mode d'acheminement"
+        password: Mot de passe
+        quality: Qualité
+      outgoing_stream:
+        host: Destination
+      incoming_stream:
+        host: Source
+    models:
+      outgoing_stream: Flux sortant
+      incoming_stream: Flux entrant
+  outgoing_streams:
+    available_at: "Disponible à l'adresse"
+    edit: 
+      title: Modifier le flux sortant
+      submit: Modifier
+      cancel: revenir
+    show:
+      title: Flux Sortant
+      no_password: aucun
+    mode:
+      pull: Mis à disposition localement (mode pull)
+      push: Envoyé vers (mode push)
+    actions:
+      edit: Modifier
+    flash:
+      update:
+        success: "La configuration a été modifiée avec succès"
+        failure: "La configuration n'a pu été modifiée"
+  incoming_streams:
+    sent_to: "Envoyé vers"
+    edit: 
+      title: Modifier le flux entrant
+      submit: Modifier
+      cancel: revenir
+    show:
+      title: Flux Entrant
+      no_password: aucun
+    mode:
+      pull: Récupéré sur (mode pull)
+      push: Réceptionné localement (mode push)
+    actions:
+      edit: Modifier
+    flash:
+      update:
+        success: "La configuration a été modifiée avec succès"
+        failure: "La configuration n'a pu été modifiée"

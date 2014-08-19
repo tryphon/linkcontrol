@@ -1,0 +1,81 @@
+<%= title_tag "#{Stream.human_name} #{@stream.presenter.name_with_status}" %>
+
+<div class="stream description <%= @stream.presenter.status_class %>">
+  <h3><%= t(".server_attributes") %></h3>
+
+  <p>
+    <%= Stream.human_attribute_name("server_type") %> :
+    <%= @stream.server_type.name %>
+  </p>
+
+  <% if @stream.server_type.supports? :server %>
+  <p>
+    <%= Stream.human_attribute_name("server") %> :
+    <%= @stream.server %>
+  </p>
+  <% end %>
+
+  <% if @stream.server_type.supports? :port %>
+  <p>
+    <%= Stream.human_attribute_name("port") %> :
+    <%= @stream.port %>
+  </p>
+  <% end %>
+
+  <% if @stream.server_type.supports? :mount_point %>
+  <p>
+    <%= Stream.human_attribute_name("mount_point") %> :
+    <%= @stream.mount_point %>
+  </p>
+  <% end %>
+
+  <% if @stream.server_type.supports? :password %>
+  <p>
+    <%= Stream.human_attribute_name("password") %> :
+    <%= @stream.password %>
+  </p>
+  <% end %>
+
+  <h3><%= t(".format_attributes") %></h3>
+
+  <p>
+    <%= Stream.human_attribute_name("format") %> :
+    <%= @stream.presenter.format.name %>, <%= @stream.presenter.mode.name %>,
+    <%= @stream.mode == :cbr ? "#{@stream.bitrate} kbps" : "#{Stream.human_attribute_name('quality')} : #{@stream.quality}" %>
+  </p>
+
+  <h3><%= t(".description_attributes") %></h3>
+  <% unless @stream.description.blank? %>
+  <p>
+    <%= Stream.human_attribute_name("description") %> :
+    <%= @stream.description %>
+  </p>
+  <% end %>
+  <% unless @stream.genre.blank? %>
+  <p>
+    <%= Stream.human_attribute_name("genre") %> :
+    <%= @stream.genre %>
+  </p>
+  <% end %>
+  <% unless @stream.related_url.blank? %>
+  <p>
+    <%= Stream.human_attribute_name("related_url") %> :
+    <%= @stream.related_url %>
+  </p>
+  <% end %>
+  <% if @stream.presenter.blank_description_attributes? %>
+    <p>
+      <%= t(".no_description_attributes") %>
+    </p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if @stream.enabled? %>
+  <%= link_to t("streams.actions.disable"), toggle_stream_path(@stream), :class => "disable", :method => :put %>
+  <% else %>
+  <%= link_to t("streams.actions.enable"), toggle_stream_path(@stream), :class => "enable", :method => :put %>
+  <% end %>
+  <%= link_to t("actions.edit"), edit_stream_path(@stream), :class => "edit" %>
+  <%= link_to t("actions.destroy"), @stream, :confirm => t("destroy.confirm"), :method => :delete, :class => "destroy" %>
+</div>

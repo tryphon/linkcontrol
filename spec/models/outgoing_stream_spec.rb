@@ -8,18 +8,18 @@ describe OutgoingStream do
 
   describe "#quality" do
 
-    it { should allow_values_for(:quality, *(0..10).to_a) }
-    it { should_not allow_values_for(:quality, -1, 11) }
+    it { should allow_value(*(0..10).to_a).for(:quality) }
+    it { should_not allow_value(-1, 11).for(:quality) }
     it { should validate_presence_of(:quality) }
 
   end
 
   describe "save" do
 
-    let(:puppet_configuration) { PuppetConfiguration.new }
-    
+    let(:puppet_configuration) { Box::PuppetConfiguration.new }
+
     before(:each) do
-      PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
+      Box::PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
     end
 
     def self.it_should_configure(attribute, options = {})
@@ -42,10 +42,10 @@ describe OutgoingStream do
 
   describe "load" do
 
-    let(:puppet_configuration) { PuppetConfiguration.new }
-    
+    let(:puppet_configuration) { Box::PuppetConfiguration.new }
+
     before(:each) do
-      PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
+      Box::PuppetConfiguration.stub!(:load).and_return(puppet_configuration)
     end
 
     def self.it_should_use(configuration_key, options = {})
@@ -73,7 +73,7 @@ describe OutgoingStream do
     end
 
     it { should validate_presence_of(:host) }
-                           
+
   end
 
 end

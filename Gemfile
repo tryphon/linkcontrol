@@ -1,41 +1,66 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem "rails", "2.3.8"
+gem 'rails', '~> 3.2.17'
 
-gem "inherited_resources", "~> 1.0.6"
-gem "responders", "~> 0.4.7"
-gem "delayed_job"
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "i18n", "< 0.5.0"
+gem 'sqlite3'
 
-gem "tryphon-box", :git => "git://projects.tryphon.priv/box"
-gem "pige", :git => "git://projects.tryphon.priv/pige"
+gem 'user_interface', :git => 'git://projects.tryphon.priv/user-interface', :branch => 'rails3' #, :path => "~/Projects/UserInterface"
+gem 'boxcontrol', :git => 'git://projects.tryphon.priv/boxcontrol', :branch => 'rails3', :require => 'box_control' #, :path => "~/Projects/BoxControl"
+gem 'tryphon-box', :git => 'git://projects.tryphon.priv/box'
+gem 'inherited_resources'
+gem 'draper', '~> 1.3'
 
-group :development do
-  gem "sqlite3-ruby"
-  gem "less"
-  gem "rake-debian-build"
-  gem "capistrano"
-  gem "rake", "~> 0.8.7"
+gem 'rails-i18n'
+gem "SyslogLogger", "~> 2.0"
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'therubyracer', :platforms => :ruby
+
+  gem 'uglifier', '>= 1.0.3'
 end
 
-group :test do
-  gem 'rspec-rails', '~> 1.3.2'
-  gem 'remarkable_rails'
+gem 'jquery-rails'
 
-  gem "metalive", "0.0.1"
-  gem "taglib-ruby", "0.4.0"
-end
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
 
-group :production do
-  gem "SyslogLogger"
-end
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
 
-group :development, :test do
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.4"
+  gem "capybara"
+
+  gem "shoulda-matchers"
+
   gem "guard"
-  gem 'guard-rspec'
-  group :linux do
-    gem 'rb-inotify'
-    gem 'libnotify'
-  end
+  gem "guard-rspec"
+  gem "guard-bundler"
+  gem "rb-inotify"
+  gem 'libnotify'
+
+  gem "brakeman", :require => false
+
+  gem 'simplecov'
+  gem 'simplecov-rcov'
+
+  gem 'capistrano'
 end

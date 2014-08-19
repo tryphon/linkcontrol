@@ -2,7 +2,9 @@ require 'ipaddr'
 require 'open-uri'
 require 'facter'
 
-class LinkStream < ActiveForm::Base
+class LinkStream
+  include BoxControl::Model
+  include BoxControl::Model::Persisted
   include PuppetConfigurable
 
   @@default_port = 8000
@@ -31,7 +33,9 @@ class LinkStream < ActiveForm::Base
     mode == "pull"
   end
 
-  def after_initialize
+  after_initialize :set_defaults
+
+  def set_defaults
     use_default_ports
     self.mode ||= (self.host.present? ? "pull" : "push")
   end
@@ -40,10 +44,6 @@ class LinkStream < ActiveForm::Base
 
   def use_default_ports
     self.port ||= default_port
-  end
-
-  def new_record?
-    false
   end
 
   UNKNOWN_PUBLIC_IP = "unknown"

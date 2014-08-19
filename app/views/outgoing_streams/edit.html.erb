@@ -1,6 +1,6 @@
 <%= title_tag t(".title") %>
 
-<% form_for @outgoing_stream, :url => outgoing_stream_path do |f| %>
+<%= form_for @outgoing_stream, :url => outgoing_stream_path do |f| %>
 <%= f.error_messages %>
 
 <h3><%= OutgoingStream.human_attribute_name("mode") %></h3>
@@ -32,8 +32,8 @@
 </p>
 
 <p>
-  <%= f.submit t(".submit") %> 
-  <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", outgoing_stream_path %>
+  <%= f.submit t(".submit") %>
+  <%= t("or") %> <%= link_to "#{t(".cancel")}", outgoing_stream_path %>
 </p>
 <% end %>
 

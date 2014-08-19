@@ -10,7 +10,7 @@ class OutgoingStream < LinkStream
 
   validates_presence_of :host, :port, :if => :push?
 
-  def after_initialize
+  def set_defaults
     self.quality ||= 5
     super
   end
