@@ -1,7 +1,7 @@
 PATH := ${HOME}/.gem/ruby/1.9.1/bin:${HOME}/.bundle/ruby/1.9.1/bin:${PATH}
 
 build:
-	LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8" strace gem1.9.1 install --no-rdoc --no-ri --user-install bundler
+	LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8" gem1.9.1 install --no-rdoc --no-ri --user-install bundler
 	MAKEFLAGS="" bundle install --deployment --without=test development
 
 	cp config/database.yml.sample config/database.yml
