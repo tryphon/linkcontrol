@@ -2,15 +2,15 @@ Source: linkcontrol
 Section: sound
 Priority: optional
 Maintainer: Alban Peignier <alban@tryphon.eu>
-Build-Depends: debhelper, cdbs, rake, rubygems, libopenssl-ruby, libsqlite3-ruby, ruby-dev, libtag1-dev, git-core
+Build-Depends: debhelper, cdbs, ruby1.9.1 (>= 1.9.3), ruby1.9.1-dev (>= 1.9.3), libxml2-dev, libxslt1-dev, libsqlite3-dev, python, git-core, libtag1-dev, strace
 Standards-Version: 3.8.1
-Homepage: http://projects.tryphon.eu/linkcontrol
+Homepage: http://projects.tryphon.eu/projects/linkcontrol
 
 Package: linkcontrol
 Architecture: all
 Depends: ruby, libsqlite3-ruby, rake, rubygems, irb
 Recommends: libapache2-mod-passenger
-Description: Web interface to manage audio links created with a 
+Description: Web interface to manage audio links created with a
  LinkBox system
  .
- See <http://projects.tryphon.eu/linkbox/> for more info.
+ See <http://projects.tryphon.eu/projects/linkbox/> for more info.
