@@ -4,7 +4,7 @@ The <%= link_to "outgoing stream", outgoing_stream_path %> manages the sound you
 
 <p>Use <strong>the same password</strong> in the Incoming Stream setup of the other LinkBox.</p>
 
-<% if (mode ||= nil) == :all or @outgoing_stream.push? %>
+<% if @outgoing_stream.pull? %>
 <p>
 <strong>Network requirements :</strong>
 in pull mode, to allow another LinkBox to come and retrieve the stream, you need :

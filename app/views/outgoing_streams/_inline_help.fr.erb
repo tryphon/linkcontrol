@@ -4,7 +4,7 @@ Le <%= link_to "flux sortant", outgoing_stream_path %> prend en charge le son qu
 
 <p>Utilisez <strong>le même mot de passe</strong> dans la configuration du Flux Entrant de l'autre LinkBox.</p>
 
-<% if (mode ||= nil) == :all or @outgoing_stream.pull? %>
+<% if @outgoing_stream.pull? %>
 <p>
 <strong>Pré-réquis réseau :</strong>
 en mode pull, pour qu'une autre LinkBox puisse venir récupérer ce flux sortant, vous devez :
